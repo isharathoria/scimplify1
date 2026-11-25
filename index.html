@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scinode Strategy Review (scroll)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Scimplify deep teal-navy world, Scinode teal/blue, IONS emerald, ATOMS gold */
+  --deep: #000F11;
+  --navy: #001F24;
+  --paper: #FCFCFC;
+  --line: #E4E7EC;
+  --ink: #1A1A1A;
+  --muted: #5F6B72;
+  --teal: #3BCEB6;
+  --blue: #1754CF;
+  --emerald: #10B981;
+  --gold: #D4A72C;
+  --alert: #D9534F;
+  --display: "Geist", "Inter", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Layout: fixed 1280x720 slides scaled to fit the window, one at a time */
+  color-scheme: dark;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--deep); color: var(--ink); font-family: var(--body); }
+.stage { padding: 24px 16px 48px; }
+.deck { max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+.slide { position: relative; padding: 52px 64px 40px; display: flex; flex-direction: column; gap: 24px; background: var(--paper); border-radius: 14px; scroll-margin-top: 72px; }
+.slide.dark { background: radial-gradient(1200px 600px at 85% -10%, rgba(59,206,182,.16), transparent 60%), linear-gradient(160deg, var(--navy), var(--deep)); color: #F2F5F5; }
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; gap: 14px; align-items: center; }
+.dark .eyebrow { color: rgba(242,245,245,.6); }
+.eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+h1 { font-family: var(--display); font-weight: 400; font-size: 64px; line-height: 1.05; letter-spacing: -.02em; text-wrap: balance; max-width: 980px; }
+h2 { font-family: var(--display); font-weight: 500; font-size: 36px; line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; max-width: 1080px; }
+h3 { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.25; }
+p, li { font-size: 18px; line-height: 1.5; }
+.lede { font-size: 21px; color: var(--muted); max-width: 900px; line-height: 1.45; }
+.dark .lede { color: rgba(242,245,245,.75); }
+.note { font-size: 16px; color: var(--muted); line-height: 1.45; max-width: 1100px; }
+.num { font-variant-numeric: tabular-nums; }
+.foot { margin-top: auto; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.dark .foot { color: rgba(242,245,245,.45); }
+
+/* Title slide */
+.stats { margin-top: 12px !important; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; margin-top: auto; }
+.stat { background: rgba(0,15,17,.6); padding: 20px 22px; }
+.stat b { display: block; font-family: var(--display); font-weight: 500; font-size: 34px; color: #fff; letter-spacing: -.01em; }
+.stat span { font-size: 14px; color: rgba(242,245,245,.65); }
+
+/* Cards */
+.grid { display: grid; gap: 16px; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g2 { grid-template-columns: 1fr 1fr; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #fff; display: flex; flex-direction: column; gap: 9px; }
+.card p { font-size: 15.5px; color: var(--muted); line-height: 1.45; }
+.card .big { font-family: var(--display); font-size: 34px; font-weight: 500; color: var(--ink); letter-spacing: -.01em; }
+.tag { align-self: flex-start; font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; }
+.t-teal { background: rgba(59,206,182,.14); color: #0E7E6C; }
+.t-blue { background: rgba(23,84,207,.10); color: var(--blue); }
+.t-em { background: rgba(16,185,129,.12); color: #057A55; }
+.t-gold { background: rgba(212,167,44,.16); color: #8A6A10; }
+.t-alert { background: rgba(217,83,79,.10); color: #B0302C; }
+.bar-teal { border-top: 3px solid var(--teal); }
+.bar-blue { border-top: 3px solid var(--blue); }
+.bar-em { border-top: 3px solid var(--emerald); }
+.bar-gold { border-top: 3px solid var(--gold); }
+
+/* Findings list */
+.findings { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+.finding { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+.finding .n { font-family: var(--mono); font-size: 14px; color: var(--alert); padding-top: 3px; }
+.finding h3 { font-size: 17.5px; margin-bottom: 3px; }
+.finding p { font-size: 15px; color: var(--muted); line-height: 1.42; }
+.finding .fix { color: #0E7E6C; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+th { text-align: left; font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: 0 14px 10px 0; border-bottom: 1px solid var(--ink); }
+td { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.4; }
+td:first-child { font-weight: 600; width: 28%; }
+td.gap { color: #B0302C; }
+.tbl td, .tbl th { font-size: 14px; padding-top: 9px; padding-bottom: 9px; }
+.tbl th { padding-top: 0; }
+.tbl td:first-child { width: 19%; }
+.tbl td .sub { display: block; font-weight: 400; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+.tbl td.lack { color: #9A2F2B; }
+.tbl td.cat { width: 13%; font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.months td:first-child { width: 13%; }
+.months td { font-size: 13.5px; }
+.months td.ms { font-weight: 600; color: #0B5F52; }
+
+/* Landscape 2x2 */
+.map { position: relative; min-height: 420px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; padding: 0 0 26px 34px; }
+.quad { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; background: #fff; }
+.quad h3 { font-size: 16px; }
+.quad .who { font-size: 13.5px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 14px; padding: 6px 11px; border-radius: 8px; background: #F2F4F6; border: 1px solid var(--line); }
+.chip.us { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 600; }
+.chip.target { background: rgba(59,206,182,.16); border: 1.5px dashed var(--teal); color: #0B5F52; font-weight: 600; }
+.quad.open { background: linear-gradient(160deg, rgba(59,206,182,.10), rgba(23,84,207,.06)); border-color: rgba(59,206,182,.6); }
+.axis-y { position: absolute; left: 0; top: 0; bottom: 26px; width: 22px; display: flex; align-items: center; justify-content: center; }
+.axis-y span { transform: rotate(-90deg); white-space: nowrap; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.axis-x { position: absolute; left: 34px; right: 0; bottom: 0; text-align: center; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+/* Layer stack */
+.stack { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.layer { display: grid; grid-template-columns: 210px 1fr 170px; gap: 20px; align-items: center; padding: 16px 20px; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+.layer .name { font-family: var(--display); font-weight: 600; font-size: 19px; }
+.layer .what { font-size: 15.5px; color: var(--muted); }
+.layer .who { justify-self: end; }
+.layer.own { background: var(--navy); border-color: var(--navy); color: #fff; }
+.layer.own .what { color: rgba(242,245,245,.72); }
+.layer.own .tag { background: rgba(59,206,182,.2); color: var(--teal); }
+
+/* Segments */
+.segs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; flex: 1; }
+.seg { border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 16px 18px; display: flex; flex-direction: column; gap: 7px; }
+.seg h3 { font-size: 17px; }
+.seg dl { display: grid; grid-template-columns: 64px 1fr; gap: 5px 10px; font-size: 13.5px; line-height: 1.38; }
+.seg dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.seg dd { color: #2C3338; }
+
+/* Money flow */
+.mflow { display: grid; grid-template-columns: 1.05fr 36px 1.45fr 36px 1fr; row-gap: 12px; align-items: stretch; flex: 1; }
+.mhead { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-bottom: 2px; }
+.mbox { border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 11px 14px; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+.mbox b { font-family: var(--display); font-size: 15.5px; font-weight: 600; }
+.mbox span { font-size: 13px; color: var(--muted); line-height: 1.35; }
+.mbox.rev { background: var(--navy); border-color: var(--navy); }
+.mbox.rev b { color: #fff; }
+.mbox.rev span { color: rgba(242,245,245,.72); }
+.mbox.now { border-left: 4px solid var(--emerald); }
+.mbox.next { border-left: 4px solid var(--gold); }
+.mbox.later { border-left: 4px solid var(--blue); }
+.arrow { display: grid; place-items: center; color: var(--muted); font-size: 18px; }
+.legend { display: flex; gap: 22px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+/* Roadmap */
+.phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1; }
+.phase { border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 20px; display: flex; flex-direction: column; gap: 11px; position: relative; }
+.phase.first { border: 2px solid var(--teal); background: linear-gradient(180deg, rgba(59,206,182,.08), #fff 60%); }
+.phase .when { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.phase ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.phase li { font-size: 15px; line-height: 1.4; padding-left: 16px; position: relative; color: #2C3338; }
+.phase li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.gate { margin-top: auto; border-top: 1px solid var(--line); padding-top: 12px; }
+.gate .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.gate .v { font-weight: 600; font-size: 16px; margin-top: 4px; }
+.phase:not(:last-child)::after { content: "→"; position: absolute; right: -15px; top: 30px; font-size: 18px; color: var(--muted); background: var(--paper); width: 14px; text-align: center; }
+
+/* Flow */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; align-items: stretch; }
+.node { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: #fff; display: flex; flex-direction: column; gap: 6px; position: relative; }
+.node .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.node h3 { font-size: 16.5px; }
+.node p { font-size: 14px; color: var(--muted); line-height: 1.4; }
+.node:not(:last-child)::after { content: "→"; position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; }
+.node.hl { border: 2px solid var(--blue); }
+.base { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.base .node { background: #F6F8F9; }
+.base .node::after { display: none; }
+
+/* Closing */
+.asks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; }
+.ask { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.14); }
+.ask .n { font-family: var(--mono); color: var(--teal); font-size: 14px; padding-top: 3px; }
+.ask h3 { color: #fff; font-size: 19px; margin-bottom: 4px; }
+.ask p { font-size: 15.5px; color: rgba(242,245,245,.7); }
+
+/* Controls */
+.controls { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; background: rgba(0,15,17,.82); border: 1px solid rgba(255,255,255,.14); border-radius: 999px; padding: 6px 8px; z-index: 5; }
+.controls button { background: transparent; border: 0; color: #E8EEEE; font: 500 14px var(--body); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.controls button:hover, .controls button:focus-visible { background: rgba(255,255,255,.12); outline: none; }
+.controls button:focus-visible { box-shadow: 0 0 0 2px var(--teal); }
+.counter { font-family: var(--mono); font-size: 12.5px; color: rgba(232,238,238,.7); min-width: 54px; text-align: center; }
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--teal); transition: width .25s ease; z-index: 5; }
+@media (prefers-reduced-motion: reduce) { .progress { transition: none; } }
+
+.topnav { position: sticky; top: 0; z-index: 5; background: rgba(0,15,17,.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,.1); }
+.topnav .in { max-width: 1240px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 6px; align-items: center; overflow-x: auto; }
+.topnav strong { color: #fff; font: 600 15px var(--display); margin-right: 14px; white-space: nowrap; }
+.topnav a { color: rgba(232,238,238,.75); text-decoration: none; font-size: 13.5px; padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+.topnav a:hover, .topnav a:focus-visible { background: rgba(255,255,255,.12); color: #fff; outline: none; }
+.topnav a:focus-visible { box-shadow: 0 0 0 2px var(--teal); }
+.foot .pg { display: none; }
+.tablewrap { overflow-x: auto; }
+@media (max-width: 960px) {
+  .slide { padding: 36px 24px 28px; }
+  h1 { font-size: 44px; } h2 { font-size: 28px; }
+  .g2, .g3, .segs, .findings, .phases, .asks, .base { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; }
+  .node:not(:last-child)::after, .phase:not(:last-child)::after { display: none; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .map { grid-template-columns: 1fr; grid-template-rows: auto; padding-left: 0; }
+  .axis-y, .axis-x { display: none; }
+  .layer { grid-template-columns: 1fr; gap: 6px; }
+  .layer .who { justify-self: start; }
+  .mflow { grid-template-columns: 1fr; }
+  .mflow .arrow, .mflow .mhead, .mflow > div:empty { display: none; }
+  .mflow .mbox.rev { margin-bottom: 14px; }
+}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Sections"><div class="in"><strong>Scinode</strong>
+<a href="#review">Review</a><a href="#gaps">Gaps</a><a href="#landscape">Market</a><a href="#market-ai">Options</a><a href="#segments">Customers</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#monthly">6-month plan</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a></div></nav>
+<div class="stage">
+<div class="deck" id="deck">
+
+<!-- Title -->
+<section id="top" class="slide dark on" aria-label="Title">
+  <div class="eyebrow"><span class="dot"></span>Scinode · IONS · ATOMS &nbsp;/&nbsp; Product review and plan &nbsp;/&nbsp; November 2026</div>
+  <h1>From lead routing to execution intelligence</h1>
+  <p class="lede">What the three platforms do today, where the market is, and a 6-month plan to make Scinode the memory behind every Scimplify order.</p>
+  <div class="stats num">
+    <div class="stat"><b>~$200M</b><span>annualized revenue, about 3× YoY</span></div>
+    <div class="stat"><b>EBITDA+</b><span>profitable for two months</span></div>
+    <div class="stat"><b>45–50%</b><span>from energy, electronics, defense</span></div>
+    <div class="stat"><b>~$2M</b><span>of the $25M round earmarked for Scinode</span></div>
+  </div>
+</section>
+
+<!-- Ground work -->
+<section id="review" class="slide" aria-label="What was reviewed">
+  <div class="eyebrow"><span class="dot"></span>Platform review</div>
+  <h2>Three front doors on one backend: plants, labs and buyers</h2>
+  <div class="grid g3">
+    <div class="card bar-gold">
+      <span class="tag t-gold">ATOMS · manufacturers</span>
+      <div class="big num">226 RFQs</div>
+      <p>Open projects (176 capability, 50 catalogue). Plant profile with ~170 reaction types, reactors, utilities. Paid Priority tier at ₹5 lakh/yr.</p>
+    </div>
+    <div class="card bar-em">
+      <span class="tag t-em">IONS · research labs</span>
+      <div class="big num">161 opps</div>
+      <p>R&amp;D opportunities matched to labs, 7-day expiry. Deep Research, Market Pulse, Demand Catalyst, proposals workspace.</p>
+    </div>
+    <div class="card bar-blue">
+      <span class="tag t-blue">Scinode · buyers</span>
+      <div class="big">Invite-only</div>
+      <p>Natural-language search, an execution agent, and 4 request types: R&amp;D project, CMO, RFQ, sample. Accounts need approval before use.</p>
+    </div>
+  </div>
+  <p class="note">Also reviewed: 15+ market players, from generic LLMs and Merck's SYNTHIA to Mstack and Scientist.com, plus research on chemistry agents, manufacturing knowledge graphs and federated learning (MELLODDY).</p>
+  <div class="foot"><span>Platform review · 23 Nov 2026</span><span class="pg"></span></div>
+</section>
+
+<!-- What's working -->
+<section id="working" class="slide" aria-label="What is working">
+  <div class="eyebrow"><span class="dot"></span>What's working</div>
+  <h2>The front end is further along than it looks</h2>
+  <div class="grid g2" style="flex:1">
+    <div class="card bar-teal"><h3>Real, structured demand</h3><p>RFQs carry CAS, purity, volume, required equipment and certifications. Example: PROJ-1102, HFPO, 100 MT/yr, NLT 98%, pressure-rated reactors. Directories list products; Scinode lists projects.</p></div>
+    <div class="card bar-teal"><h3>A three-sided loop</h3><p>Buyer RFQ → matched plants (ATOMS) and labs (IONS) → proposals → Scimplify executes. The inside-sales workflow, partly productised.</p></div>
+    <div class="card bar-gold"><h3>Monetisation already being tested</h3><p>Priority Partner at ₹5 lakh/yr: unlimited proposals, exclusive projects, intel reports, demand generation for 5 products.</p></div>
+    <div class="card bar-em"><h3>The right schema, waiting for data</h3><p>Reaction types, reactor capacity in KL, materials of construction, EHS and utilities: exactly what unit-operation matching needs.</p></div>
+  </div>
+  <div class="foot"><span>Findings</span><span class="pg"></span></div>
+</section>
+
+<!-- Gaps -->
+<section id="gaps" class="slide" aria-label="Gaps">
+  <div class="eyebrow"><span class="dot" style="background:var(--alert)"></span>What's missing</div>
+  <h2>The gap is underneath: data a buyer, a plant and an AI can trust</h2>
+  <div class="findings">
+    <div class="finding"><span class="n">01</span><div><h3>Network numbers disagree</h3><p>Research partners: 1,000+, 600+, 400+ and 200+ on different pages. ATOMS intelligence counters show "0+".</p></div></div>
+    <div class="finding"><span class="n">02</span><div><h3>Taxonomy is drifting</h3><p>"Dyes &amp; Pigments" and "Dyes and Pigments", four coatings variants. Any typed value joins the master list.</p></div></div>
+    <div class="finding"><span class="n">03</span><div><h3>Demand data is noisy</h3><p>~60 RFQs posted on 25 Oct share one volume (0.5–1 MT/yr). Bitumen sits under Agrochemicals at 34 g.</p></div></div>
+    <div class="finding"><span class="n">04</span><div><h3>Capability is self-declared</h3><p>"Can do nitration" is not "ran nitration at 5 KL, 92% yield, 2026". Nothing links profiles to executed batches.</p></div></div>
+    <div class="finding"><span class="n">05</span><div><h3>No reason for plants to return daily</h3><p>ATOMS is all about leads. Nothing helps run the plant: batches, QC, documents.</p></div></div>
+    <div class="finding"><span class="n">06</span><div><h3>Trust is a banner, not a mechanism</h3><p>"SCINODE SECURE" is on the dashboard, but there are no public data-use or IP terms. Four brands blur one system.</p></div></div>
+  </div>
+  <div class="foot"><span>Findings</span><span class="pg"></span></div>
+</section>
+
+<!-- Vision vs today -->
+<section id="vision" class="slide" aria-label="Vision versus today">
+  <div class="eyebrow"><span class="dot"></span>Vision vs today</div>
+  <h2>Each part of the vision is missing the same thing: execution data</h2>
+  <table>
+    <thead><tr><th>Vision</th><th>Today</th><th>Gap</th></tr></thead>
+    <tbody>
+      <tr><td>Beat frontier LLMs on manufacturing</td><td>Deep Research and Market Pulse reports</td><td class="gap">No use of Scimplify's own routes, yields, COAs</td></tr>
+      <tr><td>Know who can make X, at equipment level</td><td>Self-declared profiles</td><td class="gap">Not verified, not linked to batches</td></tr>
+      <tr><td>500 plants × 10 products in 6 months</td><td>7-section onboarding; a new profile starts at 6%</td><td class="gap">Plants only get leads in return</td></tr>
+      <tr><td>Agents replace the inside-sales loop</td><td>AI-structured RFQs, manual proposals</td><td class="gap">No match → outreach → quote → margin loop</td></tr>
+      <tr><td>Competing plants share data</td><td>A security banner</td><td class="gap">No data charter, firewall or anonymisation rule</td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span>Findings</span><span class="pg"></span></div>
+</section>
+
+<!-- Landscape -->
+<section id="landscape" class="slide" aria-label="Landscape">
+  <div class="eyebrow"><span class="dot"></span>Market landscape</div>
+  <h2>Nobody owns execution and the intelligence built from it</h2>
+  <div class="map">
+    <div class="axis-y"><span>Proprietary data / AI depth →</span></div>
+    <div class="quad">
+      <h3>Chemistry AI and R&amp;D software</h3>
+      <div class="chips"><span class="chip">ChatGPT · Claude</span><span class="chip">SYNTHIA (Merck)</span><span class="chip">Reaxys · CAS</span><span class="chip">Albert Invent</span><span class="chip">Scientist.com</span><span class="chip">Lila · Periodic</span></div>
+      <p class="who">Strong models, but no plant-proven routes, cost or capacity</p>
+    </div>
+    <div class="quad open">
+      <h3>Execution intelligence (open)</h3>
+      <div class="chips"><span class="chip target">Scinode, target</span></div>
+      <p class="who">Verified routes + plants + outcomes, from orders Scimplify already runs</p>
+    </div>
+    <div class="quad">
+      <h3>Directories and marketplaces</h3>
+      <div class="chips"><span class="chip">Knowde · 8K suppliers</span><span class="chip">Echemi · 20K</span><span class="chip">Molbase</span><span class="chip">Pharmaoffer · 4K</span><span class="chip">ChemSource AI</span></div>
+      <p class="who">"Find a supplier" is becoming a commodity</p>
+    </div>
+    <div class="quad">
+      <h3>Execution brands</h3>
+      <div class="chips"><span class="chip us">Scimplify today</span><span class="chip">Mstack · $40M A</span><span class="chip">Atomgrid</span><span class="chip">Elchemy</span><span class="chip">NuSynth</span></div>
+      <p class="who">Same partner-capacity model; the moat is what you learn per order</p>
+    </div>
+    <div class="axis-x">Owns the execution (pays the plant, runs the batch, ships) →</div>
+  </div>
+  <div class="foot"><span>Market</span><span class="pg"></span></div>
+</section>
+
+<!-- Market options 1 -->
+<section id="market-ai" class="slide" aria-label="Market options: AI and data">
+  <div class="eyebrow"><span class="dot"></span>Market options · 1 of 2 · AI, data and R&amp;D</div>
+  <h2>AI tools know chemistry on paper; none know which plant can run it</h2>
+  <div class="tablewrap"><table class="tbl">
+    <thead><tr><th>Option</th><th>What they offer</th><th>What they lack</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT, Claude<span class="sub">Generic frontier LLMs</span></td><td>Instant synthesis routes and explanations ("how do I make sodium sulfate?"), free or cheap</td><td class="lack">No proprietary routes, yields or COAs; no plant availability or price; can be wrong with no one accountable for delivery</td></tr>
+      <tr><td>SYNTHIA<span class="sub">Merck KGaA</span></td><td>Expert-coded retrosynthesis; routes to purchasable materials</td><td class="lack">Routes on paper: no scale-up cost, plant fit or execution. Merck is a likely buyer of plant-proven data, not a rival</td></tr>
+      <tr><td>Reaxys · CAS SciFinder<span class="sub">Elsevier · ACS</span></td><td>1B+ curated literature data points, AI search, predictive retrosynthesis</td><td class="lack">Published chemistry only; no commercial, capacity or quality data</td></tr>
+      <tr><td>Albert Invent<span class="sub">$55M Series B, Oct 2026</span></td><td>Chemistry-native model (15M molecules) and R&amp;D OS for formulators (Henkel, AkzoNobel)</td><td class="lack">Lives inside one company's lab; no external manufacturing network</td></tr>
+      <tr><td>Scientist.com<span class="sub">Science Exchange similar</span></td><td>6,000+ suppliers under pre-signed legal terms; agentic sourcing, MCP for AI assistants</td><td class="lack">Discovery services and life sciences; little process scale-up or tonnage manufacturing</td></tr>
+      <tr><td>Lila · Periodic Labs<span class="sub">Autonomous labs</span></td><td>AI plus robotic labs that generate their own experimental data</td><td class="lack">Discovery-stage; years from commercial-scale chemical supply</td></tr>
+    </tbody>
+  </table></div>
+  <div class="foot"><span>Market</span><span class="pg"></span></div>
+</section>
+
+<!-- Market options 2 -->
+<section id="market-supply" class="slide" aria-label="Market options: marketplaces and execution">
+  <div class="eyebrow"><span class="dot"></span>Market options · 2 of 2 · Marketplaces, execution and plant software</div>
+  <h2>Marketplaces list suppliers; execution brands keep the learning to themselves</h2>
+  <div class="tablewrap"><table class="tbl">
+    <thead><tr><th>Option</th><th>What they offer</th><th>What they lack</th></tr></thead>
+    <tbody>
+      <tr><td>Knowde<span class="sub">Now part of Koch</span></td><td>Storefronts for 8K+ producers; AI that cleans product data; samples and quotes</td><td class="lack">Catalogue products only; no custom synthesis or route development</td></tr>
+      <tr><td>Echemi · Molbase<span class="sub">China B2B</span></td><td>100K buyers, 20K suppliers; trade data and price insight</td><td class="lack">China-centric, a problem for buyers needing China-free supply; little capability depth</td></tr>
+      <tr><td>Pharmaoffer · ChemSource AI<span class="sub">Sourcing marketplaces, agents</span></td><td>4K+ GMP manufacturers with audits; CAS-in, shortlist-out in about 48 h</td><td class="lack">Matching on declared data; buyer still manages execution and quality</td></tr>
+      <tr><td>Mstack<span class="sub">$40M Series A, Houston/Bengaluru</span></td><td>Own brand, partner capacity, R&amp;D labs; one-stop sourcing for US buyers</td><td class="lack">Closed system: no supplier platform or intelligence product; data stays internal</td></tr>
+      <tr><td>Atomgrid · Elchemy<span class="sub">India, cross-border</span></td><td>Contract development and distribution into the US; $7M and $5.6M raised</td><td class="lack">Smaller networks; no software or data layer for plants</td></tr>
+      <tr><td>AmpleLogic · Caliber<span class="sub">eBMR / plant software</span></td><td>GMP batch records, 21 CFR Part 11 compliance for larger pharma plants</td><td class="lack">Heavy and costly for small non-GMP chemical plants; no demand attached</td></tr>
+    </tbody>
+  </table></div>
+  <div class="foot"><span>Market</span><span class="pg"></span></div>
+</section>
+
+<!-- Reframe -->
+<section id="reframe" class="slide" aria-label="Reframe">
+  <div class="eyebrow"><span class="dot"></span>The reframe</div>
+  <h2>Build a verified capability-and-execution graph, not 5,000 product records</h2>
+  <div class="stack">
+    <div class="layer own"><span class="name">Commercial outcome</span><span class="what">Price, lead time, OTIF, win/loss, margin per order</span><span class="who tag">Only Scimplify</span></div>
+    <div class="layer own"><span class="name">Executed batches</span><span class="what">Route, scale, yield, purity, COA, deviations, per plant</span><span class="who tag">Only Scimplify</span></div>
+    <div class="layer"><span class="name">Verified capability</span><span class="what">Audit or site visit confirms reactors, MoC, certifications</span><span class="who tag t-em">Field teams</span></div>
+    <div class="layer"><span class="name">Declared profile</span><span class="what">What ATOMS and IONS capture today: products, reactions, equipment</span><span class="who tag t-gold">Self-reported</span></div>
+  </div>
+  <p class="note" style="font-size:18px">Scimplify pays the plant, oversees the batch and ships the material. No marketplace or AI-software rival sees the top two layers.</p>
+  <div class="foot"><span>Strategy</span><span class="pg"></span></div>
+</section>
+
+<!-- Segments -->
+<section id="segments" class="slide" aria-label="Customer segments">
+  <div class="eyebrow"><span class="dot"></span>Who we serve</div>
+  <h2>Six customer groups, each reached a different way</h2>
+  <div class="segs">
+    <div class="seg bar-blue"><span class="tag t-blue">Buyer</span><h3>Global enterprises</h3><dl><dt>Who</dt><dd>Henkel, BASF, Sumitomo-type; US, Japan, defense</dd><dt>Need</dt><dd>China-free, traceable critical materials</dd><dt>Reach</dt><dd>Scimplify key-account teams; feasibility reports as door-opener</dd></dl></div>
+    <div class="seg bar-blue"><span class="tag t-blue">Buyer</span><h3>Mid-market brands and formulators</h3><dl><dt>Who</dt><dd>Coatings, personal care, agro, pharma intermediates</dd><dt>Need</dt><dd>Fast quotes, samples, reliable second source</dd><dt>Reach</dt><dd>Inbound search, product pages, Scinode self-serve RFQ</dd></dl></div>
+    <div class="seg bar-blue"><span class="tag t-blue">Buyer</span><h3>Startups and innovators</h3><dl><dt>Who</dt><dd>Battery, semiconductor, materials startups</dd><dt>Need</dt><dd>Lab-to-pilot-to-plant in one partner</dd><dt>Reach</dt><dd>Investor networks, accelerators, IONS R&amp;D projects</dd></dl></div>
+    <div class="seg bar-gold"><span class="tag t-gold">Supply</span><h3>Partner plants and CDMOs</h3><dl><dt>Who</dt><dd>~500 plants; the top 50 by order volume first</dd><dt>Need</dt><dd>Steady orders, less paperwork, faster payment</dd><dt>Reach</dt><dd>Field and sourcing teams; free batch log; Priority tier</dd></dl></div>
+    <div class="seg bar-gold"><span class="tag t-gold">Supply</span><h3>Long-tail SME plants</h3><dl><dt>Who</dt><dd>Digitally invisible plants: Vapi, Ankleshwar, Hyderabad; abroad later</dd><dt>Need</dt><dd>Fill idle capacity in down-cycles</dd><dt>Reach</dt><dd>Industry associations, WhatsApp onboarding, profiles pre-filled from web data</dd></dl></div>
+    <div class="seg bar-em"><span class="tag t-em">Research</span><h3>Labs, CROs and scientists</h3><dl><dt>Who</dt><dd>IITs, CSIR labs, private CROs, independent PhDs</dd><dt>Need</dt><dd>Funded projects and a path to commercialise</dd><dt>Reach</dt><dd>IONS opportunity feed, university tie-ups, paid R&amp;D milestones</dd></dl></div>
+  </div>
+  <div class="foot"><span>Go-to-market</span><span class="pg"></span></div>
+</section>
+
+<!-- Monetisation flow -->
+<section id="monetise" class="slide" aria-label="Monetisation">
+  <div class="eyebrow"><span class="dot"></span>Ways to monetise</div>
+  <h2>Six revenue streams; order margin stays the engine</h2>
+  <div class="mflow">
+    <div class="mhead">Who pays</div><div></div><div class="mhead">What they get</div><div></div><div class="mhead">Revenue stream</div>
+    <div class="mbox"><b>Enterprise and mid-market buyers</b><span>Henkel-type accounts, brands</span></div><div class="arrow">→</div>
+    <div class="mbox"><b>Matched, quoted, delivered material</b><span>Agentic quotes in hours, verified plants, QA and documents</span></div><div class="arrow">→</div>
+    <div class="mbox rev now"><b>Order margin</b><span>Existing core; Scinode raises win rate and margin</span></div>
+
+    <div class="mbox"><b>Buyers evaluating new molecules</b><span>Critical materials, scale-up decisions</span></div><div class="arrow">→</div>
+    <div class="mbox"><b>Feasibility report</b><span>Route + plant shortlist + cost and lead-time range, provenance</span></div><div class="arrow">→</div>
+    <div class="mbox rev next"><b>Paid reports</b><span>Credited against the first order</span></div>
+
+    <div class="mbox"><b>Plants and CDMOs</b><span>Partner and long-tail SMEs</span></div><div class="arrow">→</div>
+    <div class="mbox"><b>Leads, verified badge, benchmarks</b><span>Free batch log hooks them; Priority unlocks exclusive demand</span></div><div class="arrow">→</div>
+    <div class="mbox rev now"><b>Supplier subscription</b><span>Priority Partner ₹5 lakh/yr; tiered by plant size</span></div>
+
+    <div class="mbox"><b>Labs, CROs, scientists</b><span>Via IONS</span></div><div class="arrow">→</div>
+    <div class="mbox"><b>Funded R&amp;D projects</b><span>Milestone payments; a path to tech licensing</span></div><div class="arrow">→</div>
+    <div class="mbox rev next"><b>Project fee and IP share</b><span>Success fee on R&amp;D; royalty when a route goes commercial</span></div>
+
+    <div class="mbox"><b>Large chemical and pharma companies</b><span>Merck-type players</span></div><div class="arrow">→</div>
+    <div class="mbox"><b>Plant-proven route and capacity intelligence</b><span>Anonymised, aggregated, via API</span></div><div class="arrow">→</div>
+    <div class="mbox rev later"><b>Data and API licence</b><span>Once the data is verified and at scale</span></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--emerald)"></i>Live today</span><span><i style="background:var(--gold)"></i>Pilot in 6 months</span><span><i style="background:var(--blue)"></i>Later, after data is at scale</span><span>Plus: QA/QC and compliance services, priced per audit</span></div>
+  <div class="foot"><span>Business model</span><span class="pg"></span></div>
+</section>
+
+<!-- Challenges -->
+<section id="challenges" class="slide" aria-label="Challenges">
+  <div class="eyebrow"><span class="dot" style="background:var(--alert)"></span>Challenges</div>
+  <h2>Eight risks, and how to defuse each</h2>
+  <div class="findings">
+    <div class="finding"><span class="n">01</span><div><h3>Conflict of interest</h3><p>Plants fear a competitor learns their process.</p><p class="fix">Data charter, firewall from trading desks, aggregate-only views.</p></div></div>
+    <div class="finding"><span class="n">02</span><div><h3>Cold start on data</h3><p>Intelligence is weak until enough verified records exist.</p><p class="fix">Start with Scimplify's own orders: no permission needed.</p></div></div>
+    <div class="finding"><span class="n">03</span><div><h3>Disintermediation</h3><p>Buyers and plants meet on the platform, then go direct.</p><p class="fix">Keep QA, documents, credit and logistics inside Scimplify.</p></div></div>
+    <div class="finding"><span class="n">04</span><div><h3>Low digital maturity in SME plants</h3><p>Paper BPRs, WhatsApp, no IT staff.</p><p class="fix">Phone-first, Hindi/Gujarati UI, photo-to-record capture.</p></div></div>
+    <div class="finding"><span class="n">05</span><div><h3>AI accuracy and safety</h3><p>Wrong routes or hazards in chemistry are costly.</p><p class="fix">Expert-graded evals, human approval, cite the source batch.</p></div></div>
+    <div class="finding"><span class="n">06</span><div><h3>Verification cost</h3><p>Audits for 500 plants are slow and expensive.</p><p class="fix">Verify through executed orders first; audit only the top plants.</p></div></div>
+    <div class="finding"><span class="n">07</span><div><h3>Compliance</h3><p>India's DPDP Act, export controls on critical materials, buyer IP.</p><p class="fix">Legal review of the data charter; flag controlled substances.</p></div></div>
+    <div class="finding"><span class="n">08</span><div><h3>Focus and capacity</h3><p>The initiative has been deprioritised before; the team is ~3 people.</p><p class="fix">Monthly milestones tied to core revenue metrics.</p></div></div>
+  </div>
+  <div class="foot"><span>Risks</span><span class="pg"></span></div>
+</section>
+
+<!-- Phases -->
+<section id="phases" class="slide" aria-label="Six-month plan">
+  <div class="eyebrow"><span class="dot"></span>Six-month plan · phases</div>
+  <h2>Each phase earns the next</h2>
+  <div class="phases">
+    <div class="phase first">
+      <span class="when">Months 1–2 · internal</span>
+      <h3>1. Execution memory + agentic RFQ desk</h3>
+      <ul><li>Ingest past orders: RFQs, quotes, COAs, batch records</li><li>Fix taxonomy and entity resolution (CAS, reactions)</li><li>Agents: structure RFQ, rank plants, parallel outreach, compare quotes, apply margin; human approves</li></ul>
+      <div class="gate"><div class="k">Gate</div><div class="v">RFQ-to-quote time halved</div></div>
+    </div>
+    <div class="phase">
+      <span class="when">Months 3–4 · supply wedge</span>
+      <h3>2. Free mobile batch log for plants</h3>
+      <ul><li>Phone-first BPR: operator logs, supervisor approves</li><li>Auto batch report and COA template; export for CA/ERP</li><li>Start with the 20 most active partner plants</li></ul>
+      <div class="gate"><div class="k">Gate</div><div class="v">20 plants logging weekly</div></div>
+    </div>
+    <div class="phase">
+      <span class="when">Months 5–6 · revenue</span>
+      <h3>3. Verified intelligence as the paid layer</h3>
+      <ul><li>Priority tier sells verified badges and benchmarks, not just leads</li><li>Route + plant feasibility reports for US, Japan and defense buyers</li><li>China-free provenance and traceability</li></ul>
+      <div class="gate"><div class="k">Gate</div><div class="v">First paid renewals</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Plan</span><span class="pg"></span></div>
+</section>
+
+<!-- Month by month -->
+<section id="monthly" class="slide" aria-label="Month by month launch plan">
+  <div class="eyebrow"><span class="dot"></span>Tentative launch plan · month by month</div>
+  <h2>What ships each month</h2>
+  <div class="tablewrap"><table class="tbl months">
+    <thead><tr><th>Month</th><th>Product</th><th>Data and supply</th><th>Go-to-market</th><th>Exit milestone</th></tr></thead>
+    <tbody>
+      <tr><td>M1 · Discover</td><td>Map the RFQ-to-quote flow; define a 100-question eval set with scientists</td><td>Audit SAP, email and ATOMS data; fix taxonomy; draft data charter</td><td>Interview 10 buyers, 10 plants, the BD team</td><td class="ms">Baseline: quote time, win rate</td></tr>
+      <tr><td>M2 · Build</td><td>Execution memory v1 (knowledge graph); agentic RFQ intake and plant ranking</td><td>Load past orders; link plants to executed batches</td><td>Internal pilot with the BD team</td><td class="ms">50% of new RFQs auto-structured</td></tr>
+      <tr><td>M3 · Automate</td><td>Agentic quote desk: parallel outreach, quote comparison, margin rules, approval</td><td>Batch-log MVP with 5 pilot plants</td><td>Charter published; consolidate brand story</td><td class="ms">Quote time halved in pilot</td></tr>
+      <tr><td>M4 · Expand supply</td><td>Batch log v1 (Hindi/Gujarati, photo capture); new ATOMS onboarding</td><td>Pre-fill profiles from web crawl; verify top 50 plants</td><td>Associations in Vapi, Ankleshwar, Hyderabad; WhatsApp campaigns</td><td class="ms">20 plants weekly; 250 profiles</td></tr>
+      <tr><td>M5 · Intelligence beta</td><td>Verified badges, benchmarks (≥5 plants per stat); feasibility report beta</td><td>~500 verified records</td><td>Reports to 5 key accounts; repackage Priority tier</td><td class="ms">500 profiles; 3 paid reports</td></tr>
+      <tr><td>M6 · Launch</td><td>Public launch of verified intelligence on Scinode and ATOMS</td><td>~1,000 verified records</td><td>Priority upgrades push; enterprise data pilot (Merck-type)</td><td class="ms">First renewals; scale decision</td></tr>
+    </tbody>
+  </table></div>
+  <div class="foot"><span>Plan · tentative</span><span class="pg"></span></div>
+</section>
+
+<!-- Targets + trust -->
+<section id="success" class="slide" aria-label="Success and trust">
+  <div class="eyebrow"><span class="dot"></span>Success and trust</div>
+  <h2>Keep 500 × 10, but count what's verified, and make trust a mechanism</h2>
+  <div class="grid g2" style="flex:1">
+    <div class="card">
+      <span class="tag t-teal">6-month targets</span>
+      <table>
+        <tbody>
+          <tr><td>Declared profiles</td><td class="num">500 plants, ≥10 products, reactors complete</td></tr>
+          <tr><td>Verified records</td><td class="num">~1,000 plant × product/reaction, audited or batch-backed</td></tr>
+          <tr><td>Executed batches</td><td>Every Scimplify order from month 3</td></tr>
+          <tr><td>Business outcome</td><td class="num">Quote time −50%, win rate up</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <span class="tag t-blue">Trust by design</span>
+      <div class="findings" style="grid-template-columns:1fr; gap:0">
+        <div class="finding" style="padding:10px 0"><span class="n" style="color:var(--blue)">01</span><div><h3>One-page data charter</h3><p>Who sees what; no use of a plant's process data to win its customers.</p></div></div>
+        <div class="finding" style="padding:10px 0"><span class="n" style="color:var(--blue)">02</span><div><h3>Firewall + access logs</h3><p>Intelligence team separate from trading desks.</p></div></div>
+        <div class="finding" style="padding:10px 0"><span class="n" style="color:var(--blue)">03</span><div><h3>Aggregate-only benchmarks</h3><p>No stat shown unless ≥5 plants contribute. Federated models later, as in MELLODDY (10 pharma companies, 2.6B data points).</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Plan</span><span class="pg"></span></div>
+</section>
+
+<!-- Architecture -->
+<section id="architecture" class="slide" aria-label="Architecture">
+  <div class="eyebrow"><span class="dot"></span>Architecture sketch</div>
+  <h2>SAP stays the record; Scinode reads it, reasons, and writes orders back</h2>
+  <div class="flow">
+    <div class="node"><span class="k">Ingest</span><h3>Taxonomy + entity resolution</h3><p>CAS, reactions, equipment, plant IDs</p></div>
+    <div class="node hl"><span class="k">Store</span><h3>Knowledge graph</h3><p>Plants → capabilities → batches → outcomes</p></div>
+    <div class="node"><span class="k">Retrieve</span><h3>Hybrid retrieval + tools</h3><p>Graph + vector over COAs, SOPs, RFQs; retrosynthesis, costing, compliance</p></div>
+    <div class="node"><span class="k">Act</span><h3>Agents</h3><p>RFQ intake, matcher, outreach, quote drafting</p></div>
+    <div class="node"><span class="k">Control</span><h3>Human approval + evals</h3><p>Eval set graded by Scimplify's ~70 scientists</p></div>
+  </div>
+  <div class="base">
+    <div class="node"><span class="k">Sources</span><h3>SAP (system of record) · email · past orders</h3><p>Orders, batches, quality, pricing</p></div>
+    <div class="node"><span class="k">Sources</span><h3>ATOMS · IONS · batch log app</h3><p>Declared profiles, proposals, plant batch data</p></div>
+  </div>
+  <p class="note">Research supports this order: knowledge graphs make LLM supplier discovery more accurate (Li &amp; Starly), and chemistry agents need expert-graded evals (ChemToolAgent).</p>
+  <div class="foot"><span>Plan</span><span class="pg"></span></div>
+</section>
+
+<!-- Decisions -->
+<section id="decisions" class="slide dark" aria-label="Decisions">
+  <div class="eyebrow"><span class="dot"></span>Decisions to make</div>
+  <h2 style="color:#fff">Six decisions that unlock the plan</h2>
+  <div class="asks">
+    <div class="ask"><span class="n">01</span><div><h3>Data access</h3><p>Past orders in SAP and email, buyer-side Scinode data, to build execution memory.</p></div></div>
+    <div class="ask"><span class="n">02</span><div><h3>Funnel baseline</h3><p>Of ~1,100 projects, how many became orders? How many Priority Partners have paid?</p></div></div>
+    <div class="ask"><span class="n">03</span><div><h3>The six-month bar</h3><p>Working agentic RFQ loop, 500 plants, paying partners, or influenced revenue? Who signs off?</p></div></div>
+    <div class="ask"><span class="n">04</span><div><h3>Team and budget</h3><p>Is ~$2M the full Scinode budget? 2–3 builders plus a chemistry data analyst?</p></div></div>
+    <div class="ask"><span class="n">05</span><div><h3>Ownership</h3><p>One owner for product direction across founders and teams.</p></div></div>
+    <div class="ask"><span class="n">06</span><div><h3>One brand</h3><p>How Scinode, IONS, ATOMS and Scira relate for buyers and plants.</p></div></div>
+  </div>
+  <div class="foot"><span>Scinode · November 2026</span><span class="pg"></span></div>
+</section>
+
+</div>
+</div>
+
+
+</body>
+</html>
