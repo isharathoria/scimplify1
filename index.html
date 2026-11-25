@@ -269,11 +269,24 @@ td.gap { color: #B0302C; }
   .psum .k3 { grid-template-columns: 1fr 1fr; }
   .m2 { grid-template-columns: 1fr; } .m2 .ax { display: none; }
 }
+
+/* Notes + annexure */
+.notes { min-height: 420px; border: 1.5px dashed #B8C2C8; border-radius: 12px; background: #fff; padding: 20px 22px; font-size: 17px; line-height: 1.6; color: var(--ink); outline: none; white-space: pre-wrap; }
+.notes:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(59,206,182,.18); }
+.notes:empty::before { content: attr(data-placeholder); color: #9AA5AB; }
+.notebar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.notebar span { font-size: 13px; color: var(--muted); }
+.notebar button { font: 500 14px var(--body); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
+.notebar button:hover, .notebar button:focus-visible { border-color: var(--teal); outline: none; }
+.annex { background: transparent !important; padding: 28px 8px 4px !important; }
+.annex h2 { color: #fff; }
+.annex .eyebrow { color: rgba(242,245,245,.6); }
+.annex p { color: rgba(242,245,245,.7); font-size: 16px; }
 </style>
 </head>
 <body>
 <nav class="topnav" aria-label="Sections"><div class="in"><strong>Scinode</strong>
-<a href="#vision">Vision vs today</a><a href="#landscape">Market</a><a href="#reframe">Reframe</a><a href="#ions">IONS</a><a href="#atoms">ATOMS</a><a href="#gaps">Gaps</a><a href="#market-ai">Options</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#monthly">6-month plan</a><a href="#decisions">Decisions</a></div></nav>
+<a href="#vision">Vision vs today</a><a href="#landscape">Market</a><a href="#reframe">Reframe</a><a href="#ions">IONS</a><a href="#atoms">ATOMS</a><a href="#gaps">Gaps</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#phases">6-month plan</a><a href="#monthly">Monthly plan</a><a href="#decisions">Decisions</a><a href="#notes">Notes</a><a href="#annexure">Annexure</a></div></nav>
 <div class="stage">
 <div class="deck" id="deck">
 
@@ -440,42 +453,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Platforms</span><span class="pg"></span></div>
 </section>
 
-<section id="review" class="slide" aria-label="What was reviewed">
-  <div class="eyebrow"><span class="dot"></span>Platform review</div>
-  <h2>Three front doors on one backend: plants, labs and buyers</h2>
-  <div class="grid g3">
-    <div class="card bar-gold">
-      <span class="tag t-gold">ATOMS · manufacturers</span>
-      <div class="big num">226 RFQs</div>
-      <p>Open projects (176 capability, 50 catalogue). Plant profile with ~170 reaction types, reactors, utilities. Paid Priority tier at ₹5 lakh/yr.</p>
-    </div>
-    <div class="card bar-em">
-      <span class="tag t-em">IONS · research labs</span>
-      <div class="big num">161 opps</div>
-      <p>R&amp;D opportunities matched to labs, 7-day expiry. Deep Research, Market Pulse, Demand Catalyst, proposals workspace.</p>
-    </div>
-    <div class="card bar-blue">
-      <span class="tag t-blue">Scinode · buyers</span>
-      <div class="big">Invite-only</div>
-      <p>Natural-language search, an execution agent, and 4 request types: R&amp;D project, CMO, RFQ, sample. Accounts need approval before use.</p>
-    </div>
-  </div>
-  <p class="note">Also reviewed: 15+ market players, from generic LLMs and Merck's SYNTHIA to Mstack and Scientist.com, plus research on chemistry agents, manufacturing knowledge graphs and federated learning (MELLODDY).</p>
-  <div class="foot"><span>Platform review · 23 Nov 2026</span><span class="pg"></span></div>
-</section>
-
-<section id="working" class="slide" aria-label="What is working">
-  <div class="eyebrow"><span class="dot"></span>What's working</div>
-  <h2>The front end is further along than it looks</h2>
-  <div class="grid g2" style="flex:1">
-    <div class="card bar-teal"><h3>Real, structured demand</h3><p>RFQs carry CAS, purity, volume, required equipment and certifications. Example: PROJ-1102, HFPO, 100 MT/yr, NLT 98%, pressure-rated reactors. Directories list products; Scinode lists projects.</p></div>
-    <div class="card bar-teal"><h3>A three-sided loop</h3><p>Buyer RFQ → matched plants (ATOMS) and labs (IONS) → proposals → Scimplify executes. The inside-sales workflow, partly productised.</p></div>
-    <div class="card bar-gold"><h3>Monetisation already being tested</h3><p>Priority Partner at ₹5 lakh/yr: unlimited proposals, exclusive projects, intel reports, demand generation for 5 products.</p></div>
-    <div class="card bar-em"><h3>The right schema, waiting for data</h3><p>Reaction types, reactor capacity in KL, materials of construction, EHS and utilities: exactly what unit-operation matching needs.</p></div>
-  </div>
-  <div class="foot"><span>Findings</span><span class="pg"></span></div>
-</section>
-
 <section id="gaps" class="slide" aria-label="Gaps">
   <div class="eyebrow"><span class="dot" style="background:var(--alert)"></span>What's missing</div>
   <h2>The gap: the data underneath isn't reliable yet</h2>
@@ -488,40 +465,6 @@ td.gap { color: #B0302C; }
     <div class="finding"><span class="n">06</span><div><h3>Data safety is a promise, not a policy</h3><p>The app says data is secure, but there are no published rules on who can see a plant's data. Four brand names (Scinode, IONS, ATOMS, Scira) also confuse users.</p></div></div>
   </div>
   <div class="foot"><span>Findings</span><span class="pg"></span></div>
-</section>
-
-<section id="market-ai" class="slide" aria-label="Market options: AI and data">
-  <div class="eyebrow"><span class="dot"></span>Market options · 1 of 2 · AI, data and R&amp;D</div>
-  <h2>AI tools know chemistry on paper; none know which plant can run it</h2>
-  <div class="tablewrap"><table class="tbl">
-    <thead><tr><th>Option</th><th>What they offer</th><th>What they lack</th></tr></thead>
-    <tbody>
-      <tr><td>ChatGPT, Claude<span class="sub">Generic frontier LLMs</span></td><td>Instant synthesis routes and explanations ("how do I make sodium sulfate?"), free or cheap</td><td class="lack">No proprietary routes, yields or COAs; no plant availability or price; can be wrong with no one accountable for delivery</td></tr>
-      <tr><td>SYNTHIA<span class="sub">Merck KGaA</span></td><td>Expert-coded retrosynthesis; routes to purchasable materials</td><td class="lack">Routes on paper: no scale-up cost, plant fit or execution. Merck is a likely buyer of plant-proven data, not a rival</td></tr>
-      <tr><td>Reaxys · CAS SciFinder<span class="sub">Elsevier · ACS</span></td><td>1B+ curated literature data points, AI search, predictive retrosynthesis</td><td class="lack">Published chemistry only; no commercial, capacity or quality data</td></tr>
-      <tr><td>Albert Invent<span class="sub">$55M Series B, Oct 2026</span></td><td>Chemistry-native model (15M molecules) and R&amp;D OS for formulators (Henkel, AkzoNobel)</td><td class="lack">Lives inside one company's lab; no external manufacturing network</td></tr>
-      <tr><td>Scientist.com<span class="sub">Science Exchange similar</span></td><td>6,000+ suppliers under pre-signed legal terms; agentic sourcing, MCP for AI assistants</td><td class="lack">Discovery services and life sciences; little process scale-up or tonnage manufacturing</td></tr>
-      <tr><td>Lila · Periodic Labs<span class="sub">Autonomous labs</span></td><td>AI plus robotic labs that generate their own experimental data</td><td class="lack">Discovery-stage; years from commercial-scale chemical supply</td></tr>
-    </tbody>
-  </table></div>
-  <div class="foot"><span>Market</span><span class="pg"></span></div>
-</section>
-
-<section id="market-supply" class="slide" aria-label="Market options: marketplaces and execution">
-  <div class="eyebrow"><span class="dot"></span>Market options · 2 of 2 · Marketplaces, execution and plant software</div>
-  <h2>Marketplaces list suppliers; execution brands keep the learning to themselves</h2>
-  <div class="tablewrap"><table class="tbl">
-    <thead><tr><th>Option</th><th>What they offer</th><th>What they lack</th></tr></thead>
-    <tbody>
-      <tr><td>Knowde<span class="sub">Now part of Koch</span></td><td>Storefronts for 8K+ producers; AI that cleans product data; samples and quotes</td><td class="lack">Catalogue products only; no custom synthesis or route development</td></tr>
-      <tr><td>Echemi · Molbase<span class="sub">China B2B</span></td><td>100K buyers, 20K suppliers; trade data and price insight</td><td class="lack">China-centric, a problem for buyers needing China-free supply; little capability depth</td></tr>
-      <tr><td>Pharmaoffer · ChemSource AI<span class="sub">Sourcing marketplaces, agents</span></td><td>4K+ GMP manufacturers with audits; CAS-in, shortlist-out in about 48 h</td><td class="lack">Matching on declared data; buyer still manages execution and quality</td></tr>
-      <tr><td>Mstack<span class="sub">$40M Series A, Houston/Bengaluru</span></td><td>Own brand, partner capacity, R&amp;D labs; one-stop sourcing for US buyers</td><td class="lack">Closed system: no supplier platform or intelligence product; data stays internal</td></tr>
-      <tr><td>Atomgrid · Elchemy<span class="sub">India, cross-border</span></td><td>Contract development and distribution into the US; $7M and $5.6M raised</td><td class="lack">Smaller networks; no software or data layer for plants</td></tr>
-      <tr><td>AmpleLogic · Caliber<span class="sub">eBMR / plant software</span></td><td>GMP batch records, 21 CFR Part 11 compliance for larger pharma plants</td><td class="lack">Heavy and costly for small non-GMP chemical plants; no demand attached</td></tr>
-    </tbody>
-  </table></div>
-  <div class="foot"><span>Market</span><span class="pg"></span></div>
 </section>
 
 <section id="monetise" class="slide" aria-label="Monetisation">
@@ -671,9 +614,117 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Scinode · November 2026</span><span class="pg"></span></div>
 </section>
 
+<section id="notes" class="slide" aria-label="Notes">
+  <div class="eyebrow"><span class="dot"></span>Notes</div>
+  <h2>Discussion notes</h2>
+  <div class="notebar"><span id="notestatus">Click below and type. Notes are saved in this browser only.</span><button type="button" id="clearnotes">Clear notes</button></div>
+  <div id="notepad" class="notes" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Discussion notes" data-placeholder="Type notes here: questions raised, decisions, follow-ups..."></div>
+</section>
+
+<section id="annexure" class="slide annex" aria-label="Annexure">
+  <div class="eyebrow"><span class="dot"></span>Annexure</div>
+  <h2>Supporting detail</h2>
+  <p>Platform review, what's working today, and the full market comparison tables.</p>
+</section>
+
+<section id="review" class="slide" aria-label="What was reviewed">
+  <div class="eyebrow"><span class="dot"></span>Platform review</div>
+  <h2>Three front doors on one backend: plants, labs and buyers</h2>
+  <div class="grid g3">
+    <div class="card bar-gold">
+      <span class="tag t-gold">ATOMS · manufacturers</span>
+      <div class="big num">226 RFQs</div>
+      <p>Open projects (176 capability, 50 catalogue). Plant profile with ~170 reaction types, reactors, utilities. Paid Priority tier at ₹5 lakh/yr.</p>
+    </div>
+    <div class="card bar-em">
+      <span class="tag t-em">IONS · research labs</span>
+      <div class="big num">161 opps</div>
+      <p>R&amp;D opportunities matched to labs, 7-day expiry. Deep Research, Market Pulse, Demand Catalyst, proposals workspace.</p>
+    </div>
+    <div class="card bar-blue">
+      <span class="tag t-blue">Scinode · buyers</span>
+      <div class="big">Invite-only</div>
+      <p>Natural-language search, an execution agent, and 4 request types: R&amp;D project, CMO, RFQ, sample. Accounts need approval before use.</p>
+    </div>
+  </div>
+  <p class="note">Also reviewed: 15+ market players, from generic LLMs and Merck's SYNTHIA to Mstack and Scientist.com, plus research on chemistry agents, manufacturing knowledge graphs and federated learning (MELLODDY).</p>
+  <div class="foot"><span>Platform review · 23 Nov 2026</span><span class="pg"></span></div>
+</section>
+
+<section id="working" class="slide" aria-label="What is working">
+  <div class="eyebrow"><span class="dot"></span>What's working</div>
+  <h2>The front end is further along than it looks</h2>
+  <div class="grid g2" style="flex:1">
+    <div class="card bar-teal"><h3>Real, structured demand</h3><p>RFQs carry CAS, purity, volume, required equipment and certifications. Example: PROJ-1102, HFPO, 100 MT/yr, NLT 98%, pressure-rated reactors. Directories list products; Scinode lists projects.</p></div>
+    <div class="card bar-teal"><h3>A three-sided loop</h3><p>Buyer RFQ → matched plants (ATOMS) and labs (IONS) → proposals → Scimplify executes. The inside-sales workflow, partly productised.</p></div>
+    <div class="card bar-gold"><h3>Monetisation already being tested</h3><p>Priority Partner at ₹5 lakh/yr: unlimited proposals, exclusive projects, intel reports, demand generation for 5 products.</p></div>
+    <div class="card bar-em"><h3>The right schema, waiting for data</h3><p>Reaction types, reactor capacity in KL, materials of construction, EHS and utilities: exactly what unit-operation matching needs.</p></div>
+  </div>
+  <div class="foot"><span>Findings</span><span class="pg"></span></div>
+</section>
+
+<section id="market-ai" class="slide" aria-label="Market options: AI and data">
+  <div class="eyebrow"><span class="dot"></span>Market options · 1 of 2 · AI, data and R&amp;D</div>
+  <h2>AI tools know chemistry on paper; none know which plant can run it</h2>
+  <div class="tablewrap"><table class="tbl">
+    <thead><tr><th>Option</th><th>What they offer</th><th>What they lack</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT, Claude<span class="sub">Generic frontier LLMs</span></td><td>Instant synthesis routes and explanations ("how do I make sodium sulfate?"), free or cheap</td><td class="lack">No proprietary routes, yields or COAs; no plant availability or price; can be wrong with no one accountable for delivery</td></tr>
+      <tr><td>SYNTHIA<span class="sub">Merck KGaA</span></td><td>Expert-coded retrosynthesis; routes to purchasable materials</td><td class="lack">Routes on paper: no scale-up cost, plant fit or execution. Merck is a likely buyer of plant-proven data, not a rival</td></tr>
+      <tr><td>Reaxys · CAS SciFinder<span class="sub">Elsevier · ACS</span></td><td>1B+ curated literature data points, AI search, predictive retrosynthesis</td><td class="lack">Published chemistry only; no commercial, capacity or quality data</td></tr>
+      <tr><td>Albert Invent<span class="sub">$55M Series B, Oct 2026</span></td><td>Chemistry-native model (15M molecules) and R&amp;D OS for formulators (Henkel, AkzoNobel)</td><td class="lack">Lives inside one company's lab; no external manufacturing network</td></tr>
+      <tr><td>Scientist.com<span class="sub">Science Exchange similar</span></td><td>6,000+ suppliers under pre-signed legal terms; agentic sourcing, MCP for AI assistants</td><td class="lack">Discovery services and life sciences; little process scale-up or tonnage manufacturing</td></tr>
+      <tr><td>Lila · Periodic Labs<span class="sub">Autonomous labs</span></td><td>AI plus robotic labs that generate their own experimental data</td><td class="lack">Discovery-stage; years from commercial-scale chemical supply</td></tr>
+    </tbody>
+  </table></div>
+  <div class="foot"><span>Market</span><span class="pg"></span></div>
+</section>
+
+<section id="market-supply" class="slide" aria-label="Market options: marketplaces and execution">
+  <div class="eyebrow"><span class="dot"></span>Market options · 2 of 2 · Marketplaces, execution and plant software</div>
+  <h2>Marketplaces list suppliers; execution brands keep the learning to themselves</h2>
+  <div class="tablewrap"><table class="tbl">
+    <thead><tr><th>Option</th><th>What they offer</th><th>What they lack</th></tr></thead>
+    <tbody>
+      <tr><td>Knowde<span class="sub">Now part of Koch</span></td><td>Storefronts for 8K+ producers; AI that cleans product data; samples and quotes</td><td class="lack">Catalogue products only; no custom synthesis or route development</td></tr>
+      <tr><td>Echemi · Molbase<span class="sub">China B2B</span></td><td>100K buyers, 20K suppliers; trade data and price insight</td><td class="lack">China-centric, a problem for buyers needing China-free supply; little capability depth</td></tr>
+      <tr><td>Pharmaoffer · ChemSource AI<span class="sub">Sourcing marketplaces, agents</span></td><td>4K+ GMP manufacturers with audits; CAS-in, shortlist-out in about 48 h</td><td class="lack">Matching on declared data; buyer still manages execution and quality</td></tr>
+      <tr><td>Mstack<span class="sub">$40M Series A, Houston/Bengaluru</span></td><td>Own brand, partner capacity, R&amp;D labs; one-stop sourcing for US buyers</td><td class="lack">Closed system: no supplier platform or intelligence product; data stays internal</td></tr>
+      <tr><td>Atomgrid · Elchemy<span class="sub">India, cross-border</span></td><td>Contract development and distribution into the US; $7M and $5.6M raised</td><td class="lack">Smaller networks; no software or data layer for plants</td></tr>
+      <tr><td>AmpleLogic · Caliber<span class="sub">eBMR / plant software</span></td><td>GMP batch records, 21 CFR Part 11 compliance for larger pharma plants</td><td class="lack">Heavy and costly for small non-GMP chemical plants; no demand attached</td></tr>
+    </tbody>
+  </table></div>
+  <div class="foot"><span>Market</span><span class="pg"></span></div>
+</section>
+
 </div>
 </div>
 
 
+<script>
+(function () {
+  var pad = document.getElementById('notepad');
+  var status = document.getElementById('notestatus');
+  var KEY = 'scinode-notes-v1';
+  var store = null;
+  try { store = window.localStorage; store.getItem(KEY); } catch (e) { store = null; }
+  if (store) { try { var saved = store.getItem(KEY); if (saved) pad.innerText = saved; } catch (e) {} }
+  else { status.textContent = 'Click below and type. This browser blocks saving, so copy your notes before closing.'; }
+  var t;
+  pad.addEventListener('input', function () {
+    if (!store) return;
+    clearTimeout(t);
+    t = setTimeout(function () {
+      try { store.setItem(KEY, pad.innerText); status.textContent = 'Saved in this browser.'; } catch (e) { status.textContent = 'Could not save here; copy your notes before closing.'; }
+    }, 400);
+  });
+  document.getElementById('clearnotes').addEventListener('click', function () {
+    pad.innerText = '';
+    if (store) { try { store.removeItem(KEY); } catch (e) {} }
+    status.textContent = 'Notes cleared.';
+    pad.focus();
+  });
+})();
+</script>
 </body>
 </html>
