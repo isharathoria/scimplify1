@@ -234,11 +234,46 @@ td.gap { color: #B0302C; }
 .reach { font-size: 14px; color: var(--muted); }
 .reach strong { color: var(--ink); }
 @media (max-width: 960px) { .plat { grid-template-columns: 1fr; } }
+
+/* v3: platform deep-dives */
+.psum { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; border-radius: 12px; padding: 22px 24px; color: #F2F5F5; }
+.psum.ions { background: linear-gradient(160deg, #064E3B, var(--navy)); }
+.psum.atoms { background: linear-gradient(160deg, #3B2F0B, var(--navy)); }
+.psum ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.psum li { font-size: 15px; line-height: 1.45; padding-left: 16px; position: relative; color: rgba(242,245,245,.88); }
+.psum li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.psum.atoms li::before { background: var(--gold); }
+.psum .k3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start; }
+.psum .k3 div { background: rgba(255,255,255,.07); border-radius: 8px; padding: 10px 12px; }
+.psum .k3 b { display: block; font: 500 22px var(--display); color: #fff; }
+.psum .k3 span { font-size: 12px; color: rgba(242,245,245,.68); line-height: 1.3; display: block; }
+.src { font-size: 12.5px; color: var(--muted); }
+.segcols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.segcol { display: flex; flex-direction: column; gap: 10px; }
+.segcol .hd { display: flex; gap: 10px; align-items: center; }
+.segcol .hd h3 { font-size: 18px; }
+.logic { font-size: 13.5px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 10px; }
+.sbox { border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 12px 14px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; }
+.sbox .id { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+.sbox b { font-size: 15px; display: block; }
+.sbox p { font-size: 13.5px; color: #2C3338; line-height: 1.4; margin-top: 2px; }
+.sbox .eg { color: var(--muted); }
+.sbox .rc { color: #0B5F52; }
+.cross { font-size: 13.5px; color: var(--muted); background: #F4F6F7; border-radius: 8px; padding: 8px 12px; }
+.m2 { display: grid; grid-template-columns: 26px 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: 8px; }
+.m2 .ax { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; justify-content: center; text-align: center; }
+.m2 .axy { writing-mode: vertical-rl; transform: rotate(180deg); }
+.m2 .sbox { grid-template-columns: 1fr; gap: 2px; }
+@media (max-width: 960px) {
+  .psum, .segcols { grid-template-columns: 1fr; }
+  .psum .k3 { grid-template-columns: 1fr 1fr; }
+  .m2 { grid-template-columns: 1fr; } .m2 .ax { display: none; }
+}
 </style>
 </head>
 <body>
 <nav class="topnav" aria-label="Sections"><div class="in"><strong>Scinode</strong>
-<a href="#review">Review</a><a href="#ions">IONS</a><a href="#atoms">ATOMS</a><a href="#gaps">Gaps</a><a href="#landscape">Market</a><a href="#market-ai">Options</a><a href="#segments">Customers</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#monthly">6-month plan</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a></div></nav>
+<a href="#vision">Vision vs today</a><a href="#landscape">Market</a><a href="#reframe">Reframe</a><a href="#ions">IONS</a><a href="#atoms">ATOMS</a><a href="#gaps">Gaps</a><a href="#market-ai">Options</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#monthly">6-month plan</a><a href="#decisions">Decisions</a></div></nav>
 <div class="stage">
 <div class="deck" id="deck">
 
@@ -255,132 +290,6 @@ td.gap { color: #B0302C; }
   </div>
 </section>
 
-<!-- Ground work -->
-<section id="review" class="slide" aria-label="What was reviewed">
-  <div class="eyebrow"><span class="dot"></span>Platform review</div>
-  <h2>Three front doors on one backend: plants, labs and buyers</h2>
-  <div class="grid g3">
-    <div class="card bar-gold">
-      <span class="tag t-gold">ATOMS · manufacturers</span>
-      <div class="big num">226 RFQs</div>
-      <p>Open projects (176 capability, 50 catalogue). Plant profile with ~170 reaction types, reactors, utilities. Paid Priority tier at ₹5 lakh/yr.</p>
-    </div>
-    <div class="card bar-em">
-      <span class="tag t-em">IONS · research labs</span>
-      <div class="big num">161 opps</div>
-      <p>R&amp;D opportunities matched to labs, 7-day expiry. Deep Research, Market Pulse, Demand Catalyst, proposals workspace.</p>
-    </div>
-    <div class="card bar-blue">
-      <span class="tag t-blue">Scinode · buyers</span>
-      <div class="big">Invite-only</div>
-      <p>Natural-language search, an execution agent, and 4 request types: R&amp;D project, CMO, RFQ, sample. Accounts need approval before use.</p>
-    </div>
-  </div>
-  <p class="note">Also reviewed: 15+ market players, from generic LLMs and Merck's SYNTHIA to Mstack and Scientist.com, plus research on chemistry agents, manufacturing knowledge graphs and federated learning (MELLODDY).</p>
-  <div class="foot"><span>Platform review · 23 Nov 2026</span><span class="pg"></span></div>
-</section>
-
-<!-- What's working -->
-<section id="ions" class="slide" aria-label="IONS for researchers">
-  <div class="eyebrow"><span class="dot" style="background:var(--emerald)"></span>IONS · research platform</div>
-  <h2>IONS turns labs and scientists into an on-demand R&amp;D bench</h2>
-  <div class="plat">
-    <div class="pcard ions">
-      <span class="tag" style="background:rgba(16,185,129,.2);color:#6EE7B7">What IONS does</span>
-      <ul>
-        <li>Labs list capabilities across 20+ industries and 350+ techniques</li>
-        <li>Matched R&amp;D opportunities arrive in a feed (7-day expiry)</li>
-        <li>Labs send proposals and run projects in a shared workspace</li>
-        <li>Built-in tools: Deep Research, Market Pulse, Demand Catalyst</li>
-        <li>Gap today: no verified track record per lab; IP terms not public</li>
-      </ul>
-      <div class="kpis num"><div><b>161</b><span>live opportunities</span></div><div><b>50+</b><span>new per week</span></div><div><b>200+</b><span>researchers in app</span></div><div><b>90+</b><span>projects delivered</span></div></div>
-    </div>
-    <div class="plist">
-      <div class="hd"><span class="tag t-em">Users</span><h3>Who supplies the R&amp;D</h3></div>
-      <div class="pitem"><b>Academic and government labs</b><span>IITs, IISc, ICT Mumbai, CSIR-NCL Pune, CSIR-IICT Hyderabad</span></div>
-      <div class="pitem"><b>Private CROs and CRDMOs</b><span>Mid-size Indian CROs with spare chemist capacity; Sai Life Sciences-type</span></div>
-      <div class="pitem"><b>Independent PhDs and retired industry scientists</b><span>Niche know-how: fluorination, photoresists, catalysis, peptides</span></div>
-      <div class="pitem"><b>Analytical and testing labs</b><span>Characterisation, impurity profiling, stability studies</span></div>
-      <div class="pitem"><b>Overseas university labs (later)</b><span>Tech-transfer offices in Germany, Japan, the US</span></div>
-    </div>
-    <div class="plist">
-      <div class="hd"><span class="tag t-blue">Buyers</span><h3>Who brings R&amp;D projects</h3></div>
-      <div class="pitem"><b>Specialty and agrochemical companies</b><span>Route development and cost-down: Coromandel (on Scinode's trusted-by list), PI Industries, UPL</span></div>
-      <div class="pitem"><b>Pharma and generic API makers</b><span>Process R&amp;D, impurity work, new generic molecules</span></div>
-      <div class="pitem"><b>Battery, semiconductor and materials startups</b><span>Lab-to-pilot work, e.g. Li-Si powder and MoCl₄ requests seen on IONS</span></div>
-      <div class="pitem"><b>Global corporates outsourcing R&amp;D</b><span>BASF, Sumitomo (trusted-by list); Henkel (investor)</span></div>
-      <div class="pitem"><b>FMCG and personal-care formulators</b><span>ITC, Dabur (trusted-by list): actives, UV filters, green surfactants</span></div>
-    </div>
-  </div>
-  <p class="reach"><strong>How to reach:</strong> university and CSIR tie-ups, tech-transfer offices, CRO networks for users; Scimplify key-account teams and the IONS opportunity feed for buyers.</p>
-  <div class="foot"><span>Platforms</span><span class="pg"></span></div>
-</section>
-
-<section id="atoms" class="slide" aria-label="ATOMS for manufacturers">
-  <div class="eyebrow"><span class="dot" style="background:var(--gold)"></span>ATOMS · manufacturer platform</div>
-  <h2>ATOMS makes idle plant capacity discoverable and bookable</h2>
-  <div class="plat">
-    <div class="pcard atoms">
-      <span class="tag" style="background:rgba(212,167,44,.22);color:#F3D27A">What ATOMS does</span>
-      <ul>
-        <li>Plant profile: ~170 reaction types, reactors (KL, MoC), utilities</li>
-        <li>Matched RFQs arrive; plants send proposals</li>
-        <li>Market Pulse price signals; Deep Research</li>
-        <li>Demand Catalyst: Scinode sales promotes star products</li>
-        <li>Gap today: capability is self-declared; nothing for daily plant work</li>
-      </ul>
-      <div class="kpis num"><div><b>226</b><span>open RFQs</span></div><div><b>~1,100</b><span>projects logged</span></div><div><b>Free</b><span>Access Partner</span></div><div><b>₹5L/yr</b><span>Priority Partner</span></div></div>
-    </div>
-    <div class="plist">
-      <div class="hd"><span class="tag t-gold">Users</span><h3>Who supplies capacity</h3></div>
-      <div class="pitem"><b>Specialty-chemical SME plants in Indian clusters</b><span>Vapi, Ankleshwar, Dahej (Gujarat); Tarapur (Maharashtra); Hyderabad, Vizag</span></div>
-      <div class="pitem"><b>Mid-size CDMOs and CMOs</b><span>Multipurpose plants with idle reactors in demand down-cycles</span></div>
-      <div class="pitem"><b>Pharma intermediate and API plants</b><span>GMP and non-GMP units making intermediates</span></div>
-      <div class="pitem"><b>Metals and critical-materials processors</b><span>Tungsten, rare earths, battery recycling (APT and black-mass RFQs seen)</span></div>
-      <div class="pitem"><b>Overseas plants (later)</b><span>Germany's ~1,200 chemical manufacturers, SE Asia, Middle East</span></div>
-    </div>
-    <div class="plist">
-      <div class="hd"><span class="tag t-blue">Buyers</span><h3>Who brings demand</h3></div>
-      <div class="pitem"><b>Global chemical companies and distributors</b><span>BASF, Sumitomo, Azelis (trusted-by list)</span></div>
-      <div class="pitem"><b>Agrochemical majors</b><span>Coromandel (trusted-by list) and active-ingredient makers needing intermediates</span></div>
-      <div class="pitem"><b>Pharma and generic API companies</b><span>Intermediates and APIs, like the ~60 pharma RFQs live on ATOMS</span></div>
-      <div class="pitem"><b>Coatings, polymers and construction</b><span>Henkel, Teknor Apex (investors and customers); Saudi coatings RFQs seen</span></div>
-      <div class="pitem"><b>Electronics, energy and defense (US, Japan)</b><span>China-free critical materials: Scimplify's fastest-growing segment</span></div>
-    </div>
-  </div>
-  <p class="reach"><strong>How to reach:</strong> cluster associations, field teams, WhatsApp and the free batch log for plants; key accounts, trading houses and inbound RFQs for buyers.</p>
-  <div class="foot"><span>Platforms</span><span class="pg"></span></div>
-</section>
-
-<section id="working" class="slide" aria-label="What is working">
-  <div class="eyebrow"><span class="dot"></span>What's working</div>
-  <h2>The front end is further along than it looks</h2>
-  <div class="grid g2" style="flex:1">
-    <div class="card bar-teal"><h3>Real, structured demand</h3><p>RFQs carry CAS, purity, volume, required equipment and certifications. Example: PROJ-1102, HFPO, 100 MT/yr, NLT 98%, pressure-rated reactors. Directories list products; Scinode lists projects.</p></div>
-    <div class="card bar-teal"><h3>A three-sided loop</h3><p>Buyer RFQ → matched plants (ATOMS) and labs (IONS) → proposals → Scimplify executes. The inside-sales workflow, partly productised.</p></div>
-    <div class="card bar-gold"><h3>Monetisation already being tested</h3><p>Priority Partner at ₹5 lakh/yr: unlimited proposals, exclusive projects, intel reports, demand generation for 5 products.</p></div>
-    <div class="card bar-em"><h3>The right schema, waiting for data</h3><p>Reaction types, reactor capacity in KL, materials of construction, EHS and utilities: exactly what unit-operation matching needs.</p></div>
-  </div>
-  <div class="foot"><span>Findings</span><span class="pg"></span></div>
-</section>
-
-<!-- Gaps -->
-<section id="gaps" class="slide" aria-label="Gaps">
-  <div class="eyebrow"><span class="dot" style="background:var(--alert)"></span>What's missing</div>
-  <h2>The gap is underneath: data a buyer, a plant and an AI can trust</h2>
-  <div class="findings">
-    <div class="finding"><span class="n">01</span><div><h3>Network numbers disagree</h3><p>Research partners: 1,000+, 600+, 400+ and 200+ on different pages. ATOMS intelligence counters show "0+".</p></div></div>
-    <div class="finding"><span class="n">02</span><div><h3>Taxonomy is drifting</h3><p>"Dyes &amp; Pigments" and "Dyes and Pigments", four coatings variants. Any typed value joins the master list.</p></div></div>
-    <div class="finding"><span class="n">03</span><div><h3>Demand data is noisy</h3><p>~60 RFQs posted on 25 Oct share one volume (0.5–1 MT/yr). Bitumen sits under Agrochemicals at 34 g.</p></div></div>
-    <div class="finding"><span class="n">04</span><div><h3>Capability is self-declared</h3><p>"Can do nitration" is not "ran nitration at 5 KL, 92% yield, 2026". Nothing links profiles to executed batches.</p></div></div>
-    <div class="finding"><span class="n">05</span><div><h3>No reason for plants to return daily</h3><p>ATOMS is all about leads. Nothing helps run the plant: batches, QC, documents.</p></div></div>
-    <div class="finding"><span class="n">06</span><div><h3>Trust is a banner, not a mechanism</h3><p>"SCINODE SECURE" is on the dashboard, but there are no public data-use or IP terms. Four brands blur one system.</p></div></div>
-  </div>
-  <div class="foot"><span>Findings</span><span class="pg"></span></div>
-</section>
-
-<!-- Vision vs today -->
 <section id="vision" class="slide" aria-label="Vision versus today">
   <div class="eyebrow"><span class="dot"></span>Vision vs today</div>
   <h2>Each part of the vision is missing the same thing: execution data</h2>
@@ -397,7 +306,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Findings</span><span class="pg"></span></div>
 </section>
 
-<!-- Landscape -->
 <section id="landscape" class="slide" aria-label="Landscape">
   <div class="eyebrow"><span class="dot"></span>Market landscape</div>
   <h2>Nobody owns execution and the intelligence built from it</h2>
@@ -428,7 +336,160 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Market</span><span class="pg"></span></div>
 </section>
 
-<!-- Market options 1 -->
+<section id="reframe" class="slide" aria-label="Reframe">
+  <div class="eyebrow"><span class="dot"></span>The reframe</div>
+  <h2>Build a verified capability-and-execution graph, not 5,000 product records</h2>
+  <div class="stack">
+    <div class="layer own"><span class="name">Commercial outcome</span><span class="what">Price, lead time, OTIF, win/loss, margin per order</span><span class="who tag">Only Scimplify</span></div>
+    <div class="layer own"><span class="name">Executed batches</span><span class="what">Route, scale, yield, purity, COA, deviations, per plant</span><span class="who tag">Only Scimplify</span></div>
+    <div class="layer"><span class="name">Verified capability</span><span class="what">Audit or site visit confirms reactors, MoC, certifications</span><span class="who tag t-em">Field teams</span></div>
+    <div class="layer"><span class="name">Declared profile</span><span class="what">What ATOMS and IONS capture today: products, reactions, equipment</span><span class="who tag t-gold">Self-reported</span></div>
+  </div>
+  <p class="note" style="font-size:18px">Scimplify pays the plant, oversees the batch and ships the material. No marketplace or AI-software rival sees the top two layers.</p>
+  <div class="foot"><span>Strategy</span><span class="pg"></span></div>
+</section>
+
+<section id="ions" class="slide" aria-label="IONS for researchers">
+  <div class="eyebrow"><span class="dot" style="background:var(--emerald)"></span>IONS · research platform</div>
+  <h2>IONS turns labs and scientists into an on-demand R&amp;D bench</h2>
+  <div class="psum ions">
+    <ul>
+      <li>Labs and scientists list what they can do; IONS matches them to R&amp;D requests.</li>
+      <li>Each request stays open 7 days. Labs reply with proposals and run the project in a shared workspace.</li>
+      <li>Built-in tools: Deep Research, Market Pulse, Demand Catalyst.</li>
+      <li>Main gap: no verified track record per lab, and IP terms are not public.</li>
+    </ul>
+    <div class="k3 num">
+      <div><b>161</b><span>open R&amp;D opportunities</span></div>
+      <div><b>50+</b><span>new opportunities a week</span></div>
+      <div><b>350+</b><span>R&amp;D capabilities listed</span></div>
+      <div><b>200+</b><span>researchers</span></div>
+      <div><b>90+</b><span>projects delivered</span></div>
+      <div><b>20+</b><span>countries</span></div>
+    </div>
+  </div>
+  <p class="src">Figures as shown in the IONS app on 23 Nov 2026. They are Scimplify's own numbers, not independently checked.</p>
+  <div class="segcols">
+    <div class="segcol">
+      <div class="hd"><span class="tag t-em">Users</span><h3>Who supplies the R&amp;D</h3></div>
+      <p class="logic">Split by type of organisation. Every R&amp;D provider fits exactly one group.</p>
+      <div class="sbox"><span class="id">U1</span><div><b>Universities and institutes</b><p>Academic groups with equipment and PhD students; want funded projects and industry links.</p><p class="eg">e.g. IITs, IISc, ICT Mumbai</p><p class="rc">Reach: tech-transfer offices, faculty networks</p></div></div>
+      <div class="sbox"><span class="id">U2</span><div><b>Government research labs</b><p>Public labs with pilot facilities and a mandate to commercialise.</p><p class="eg">e.g. CSIR-NCL Pune, CSIR-IICT Hyderabad</p><p class="rc">Reach: institutional agreements</p></div></div>
+      <div class="sbox"><span class="id">U3</span><div><b>Commercial R&amp;D firms</b><p>Contract research companies and testing labs that sell R&amp;D as a service.</p><p class="eg">e.g. mid-size Indian contract research firms</p><p class="rc">Reach: direct sales, paid Priority tier</p></div></div>
+      <div class="sbox"><span class="id">U4</span><div><b>Individual experts</b><p>Independent PhDs, consultants and retired industry scientists with niche know-how.</p><p class="eg">e.g. fluorination, photoresist or catalysis specialists</p><p class="rc">Reach: LinkedIn, alumni and professional networks</p></div></div>
+      <p class="cross">India first; overseas labs and universities later.</p>
+    </div>
+    <div class="segcol">
+      <div class="hd"><span class="tag t-blue">Buyers</span><h3>Who brings R&amp;D projects</h3></div>
+      <p class="logic">Split by type of buyer organisation. Every R&amp;D buyer fits exactly one group.</p>
+      <div class="sbox"><span class="id">B1</span><div><b>Large enterprises</b><p>Have in-house R&amp;D; outsource overflow work or niche chemistry.</p><p class="eg">e.g. BASF, Sumitomo, Coromandel (on Scinode's trusted-by list); Henkel (investor)</p><p class="rc">Reach: Scimplify key-account teams</p></div></div>
+      <div class="sbox"><span class="id">B2</span><div><b>Mid-size companies and SMEs</b><p>Little or no in-house R&amp;D; need new routes, cost reduction, scale-up.</p><p class="eg">e.g. Indian specialty, agro and pharma makers without a large R&amp;D centre</p><p class="rc">Reach: inbound search, IONS self-serve requests</p></div></div>
+      <div class="sbox"><span class="id">B3</span><div><b>Startups</b><p>Venture-backed and pre-scale; need lab-to-pilot work fast.</p><p class="eg">e.g. battery and semiconductor-materials startups (Li-Si powder, MoCl₄ requests seen)</p><p class="rc">Reach: investor networks, accelerators</p></div></div>
+      <div class="sbox"><span class="id">B4</span><div><b>Public sector and institutions</b><p>Government programmes and strategic-materials agencies that fund applied R&amp;D.</p><p class="eg">e.g. projects under India's RDI scheme</p><p class="rc">Reach: grant and programme partnerships</p></div></div>
+      <p class="cross">Industries cut across all four groups: agrochemicals, pharma, materials and electronics, personal care, energy.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Platforms</span><span class="pg"></span></div>
+</section>
+
+<section id="atoms" class="slide" aria-label="ATOMS for manufacturers">
+  <div class="eyebrow"><span class="dot" style="background:var(--gold)"></span>ATOMS · manufacturer platform</div>
+  <h2>ATOMS makes idle plant capacity discoverable and bookable</h2>
+  <div class="psum atoms">
+    <ul>
+      <li>Plants build a profile: reactions they can run, reactors (size in KL, material), utilities.</li>
+      <li>Matched buyer requests arrive; plants reply with proposals.</li>
+      <li>Tools: Market Pulse (demand and price signals), Deep Research, Demand Catalyst (Scinode's sales team promotes a plant's products).</li>
+      <li>Main gap: profiles are self-declared, and nothing helps with daily plant work.</li>
+    </ul>
+    <div class="k3 num">
+      <div><b>226</b><span>open requests (176 capability, 50 catalogue)</span></div>
+      <div><b>~170</b><span>reaction types in the profile form</span></div>
+      <div><b>~1,100</b><span>requests created (estimate)</span></div>
+      <div><b>Free</b><span>Access Partner: 2 proposals</span></div>
+      <div><b>₹5L/yr</b><span>Priority Partner: unlimited</span></div>
+      <div><b>7</b><span>profile sections to complete</span></div>
+    </div>
+  </div>
+  <p class="src">Figures from the ATOMS portal on 23 Nov 2026. The ~1,100 is estimated from project ID numbers (PROJ-1102), not a published figure.</p>
+  <div class="segcols">
+    <div class="segcol">
+      <div class="hd"><span class="tag t-gold">Users</span><h3>Who supplies capacity</h3></div>
+      <p class="logic">Split by business model and size. Every plant fits exactly one box.</p>
+      <div class="m2">
+        <div></div><div class="ax">Makes its own products</div><div class="ax">Makes to a customer's spec</div>
+        <div class="ax axy">Small and mid-size</div>
+        <div class="sbox"><b>U1 · Small catalogue producers</b><p>Fixed product list; idle capacity in down-cycles.</p><p class="eg">e.g. SME plants in Vapi, Ankleshwar, Dahej, Tarapur</p><p class="rc">Fit: catalogue requests, Demand Catalyst</p></div>
+        <div class="sbox"><b>U3 · Job-work and toll manufacturers</b><p>Multipurpose reactors; run any process to order.</p><p class="eg">e.g. job-work units in Gujarat and Hyderabad</p><p class="rc">Fit: capability requests (176 open)</p></div>
+        <div class="ax axy">Large</div>
+        <div class="sbox"><b>U2 · Large producers</b><p>Sell surplus volume or enter new markets.</p><p class="eg">e.g. listed Indian specialty-chemical companies</p><p class="rc">Fit: bulk catalogue requests, Market Pulse</p></div>
+        <div class="sbox"><b>U4 · Established contract manufacturers</b><p>Complex, regulated multi-step projects.</p><p class="eg">e.g. pharma and agro contract manufacturers</p><p class="rc">Fit: exclusive projects, Priority tier</p></div>
+      </div>
+      <p class="cross">Critical-materials processors (tungsten, rare earths, recycling) sit in whichever box matches their model. India first; overseas plants (e.g. Germany's ~1,200 chemical manufacturers) later.</p>
+    </div>
+    <div class="segcol">
+      <div class="hd"><span class="tag t-blue">Buyers</span><h3>Who brings demand</h3></div>
+      <p class="logic">Split first by role (uses the chemical vs resells it), then end users by size. Every buyer fits exactly one group.</p>
+      <div class="sbox"><span class="id">B1</span><div><b>Enterprise end users</b><p>Need a reliable second source, China-free supply, traceability.</p><p class="eg">e.g. BASF, Sumitomo (trusted-by list); Henkel, Teknor Apex (investors); US, Japan and defense critical-materials buyers</p><p class="rc">Reach: Scimplify key accounts</p></div></div>
+      <div class="sbox"><span class="id">B2</span><div><b>Mid-market end users</b><p>Formulators and manufacturers buying intermediates and raw materials; need fast quotes and samples.</p><p class="eg">e.g. coatings, personal-care and generic-drug makers</p><p class="rc">Reach: inbound search, self-serve requests</p></div></div>
+      <div class="sbox"><span class="id">B3</span><div><b>Startups and new ventures</b><p>Need small first batches that can scale later.</p><p class="eg">e.g. battery and semiconductor-materials startups</p><p class="rc">Reach: investor networks, accelerators</p></div></div>
+      <div class="sbox"><span class="id">B4</span><div><b>Distributors and traders</b><p>Buy to resell; need dependable supply and documents.</p><p class="eg">e.g. Azelis (trusted-by list), global trading houses</p><p class="rc">Reach: partnership deals</p></div></div>
+      <p class="cross">Industries cut across all four groups: agro, pharma, coatings and polymers, personal care, electronics, energy.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Platforms</span><span class="pg"></span></div>
+</section>
+
+<section id="review" class="slide" aria-label="What was reviewed">
+  <div class="eyebrow"><span class="dot"></span>Platform review</div>
+  <h2>Three front doors on one backend: plants, labs and buyers</h2>
+  <div class="grid g3">
+    <div class="card bar-gold">
+      <span class="tag t-gold">ATOMS · manufacturers</span>
+      <div class="big num">226 RFQs</div>
+      <p>Open projects (176 capability, 50 catalogue). Plant profile with ~170 reaction types, reactors, utilities. Paid Priority tier at ₹5 lakh/yr.</p>
+    </div>
+    <div class="card bar-em">
+      <span class="tag t-em">IONS · research labs</span>
+      <div class="big num">161 opps</div>
+      <p>R&amp;D opportunities matched to labs, 7-day expiry. Deep Research, Market Pulse, Demand Catalyst, proposals workspace.</p>
+    </div>
+    <div class="card bar-blue">
+      <span class="tag t-blue">Scinode · buyers</span>
+      <div class="big">Invite-only</div>
+      <p>Natural-language search, an execution agent, and 4 request types: R&amp;D project, CMO, RFQ, sample. Accounts need approval before use.</p>
+    </div>
+  </div>
+  <p class="note">Also reviewed: 15+ market players, from generic LLMs and Merck's SYNTHIA to Mstack and Scientist.com, plus research on chemistry agents, manufacturing knowledge graphs and federated learning (MELLODDY).</p>
+  <div class="foot"><span>Platform review · 23 Nov 2026</span><span class="pg"></span></div>
+</section>
+
+<section id="working" class="slide" aria-label="What is working">
+  <div class="eyebrow"><span class="dot"></span>What's working</div>
+  <h2>The front end is further along than it looks</h2>
+  <div class="grid g2" style="flex:1">
+    <div class="card bar-teal"><h3>Real, structured demand</h3><p>RFQs carry CAS, purity, volume, required equipment and certifications. Example: PROJ-1102, HFPO, 100 MT/yr, NLT 98%, pressure-rated reactors. Directories list products; Scinode lists projects.</p></div>
+    <div class="card bar-teal"><h3>A three-sided loop</h3><p>Buyer RFQ → matched plants (ATOMS) and labs (IONS) → proposals → Scimplify executes. The inside-sales workflow, partly productised.</p></div>
+    <div class="card bar-gold"><h3>Monetisation already being tested</h3><p>Priority Partner at ₹5 lakh/yr: unlimited proposals, exclusive projects, intel reports, demand generation for 5 products.</p></div>
+    <div class="card bar-em"><h3>The right schema, waiting for data</h3><p>Reaction types, reactor capacity in KL, materials of construction, EHS and utilities: exactly what unit-operation matching needs.</p></div>
+  </div>
+  <div class="foot"><span>Findings</span><span class="pg"></span></div>
+</section>
+
+<section id="gaps" class="slide" aria-label="Gaps">
+  <div class="eyebrow"><span class="dot" style="background:var(--alert)"></span>What's missing</div>
+  <h2>The gap: the data underneath isn't reliable yet</h2>
+  <div class="findings">
+    <div class="finding"><span class="n">01</span><div><h3>The numbers don't match</h3><p>Different pages give different counts for the same thing. Research partners show as 1,000+, 600+, 400+ and 200+. Some counters show "0+".</p></div></div>
+    <div class="finding"><span class="n">02</span><div><h3>Categories are messy</h3><p>The same industry appears under two names, like "Dyes &amp; Pigments" and "Dyes and Pigments". Anyone can add a new one, so the list keeps growing.</p></div></div>
+    <div class="finding"><span class="n">03</span><div><h3>Buyer requests are incomplete</h3><p>Many have no chemical ID number or country. About 60 share the same placeholder quantity. Some sit in the wrong industry.</p></div></div>
+    <div class="finding"><span class="n">04</span><div><h3>Plants describe themselves, and no one checks</h3><p>A plant can tick "we do nitration" with no proof it has done it, at what size, or how well.</p></div></div>
+    <div class="finding"><span class="n">05</span><div><h3>Plants have no reason to log in every day</h3><p>The portal only offers sales leads. It doesn't help run the factory.</p></div></div>
+    <div class="finding"><span class="n">06</span><div><h3>Data safety is a promise, not a policy</h3><p>The app says data is secure, but there are no published rules on who can see a plant's data. Four brand names (Scinode, IONS, ATOMS, Scira) also confuse users.</p></div></div>
+  </div>
+  <div class="foot"><span>Findings</span><span class="pg"></span></div>
+</section>
+
 <section id="market-ai" class="slide" aria-label="Market options: AI and data">
   <div class="eyebrow"><span class="dot"></span>Market options · 1 of 2 · AI, data and R&amp;D</div>
   <h2>AI tools know chemistry on paper; none know which plant can run it</h2>
@@ -446,7 +507,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Market</span><span class="pg"></span></div>
 </section>
 
-<!-- Market options 2 -->
 <section id="market-supply" class="slide" aria-label="Market options: marketplaces and execution">
   <div class="eyebrow"><span class="dot"></span>Market options · 2 of 2 · Marketplaces, execution and plant software</div>
   <h2>Marketplaces list suppliers; execution brands keep the learning to themselves</h2>
@@ -464,36 +524,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Market</span><span class="pg"></span></div>
 </section>
 
-<!-- Reframe -->
-<section id="reframe" class="slide" aria-label="Reframe">
-  <div class="eyebrow"><span class="dot"></span>The reframe</div>
-  <h2>Build a verified capability-and-execution graph, not 5,000 product records</h2>
-  <div class="stack">
-    <div class="layer own"><span class="name">Commercial outcome</span><span class="what">Price, lead time, OTIF, win/loss, margin per order</span><span class="who tag">Only Scimplify</span></div>
-    <div class="layer own"><span class="name">Executed batches</span><span class="what">Route, scale, yield, purity, COA, deviations, per plant</span><span class="who tag">Only Scimplify</span></div>
-    <div class="layer"><span class="name">Verified capability</span><span class="what">Audit or site visit confirms reactors, MoC, certifications</span><span class="who tag t-em">Field teams</span></div>
-    <div class="layer"><span class="name">Declared profile</span><span class="what">What ATOMS and IONS capture today: products, reactions, equipment</span><span class="who tag t-gold">Self-reported</span></div>
-  </div>
-  <p class="note" style="font-size:18px">Scimplify pays the plant, oversees the batch and ships the material. No marketplace or AI-software rival sees the top two layers.</p>
-  <div class="foot"><span>Strategy</span><span class="pg"></span></div>
-</section>
-
-<!-- Segments -->
-<section id="segments" class="slide" aria-label="Customer segments">
-  <div class="eyebrow"><span class="dot"></span>Who we serve</div>
-  <h2>Six customer groups, each reached a different way</h2>
-  <div class="segs">
-    <div class="seg bar-blue"><span class="tag t-blue">Buyer</span><h3>Global enterprises</h3><dl><dt>Who</dt><dd>Henkel, BASF, Sumitomo-type; US, Japan, defense</dd><dt>Need</dt><dd>China-free, traceable critical materials</dd><dt>Reach</dt><dd>Scimplify key-account teams; feasibility reports as door-opener</dd></dl></div>
-    <div class="seg bar-blue"><span class="tag t-blue">Buyer</span><h3>Mid-market brands and formulators</h3><dl><dt>Who</dt><dd>Coatings, personal care, agro, pharma intermediates</dd><dt>Need</dt><dd>Fast quotes, samples, reliable second source</dd><dt>Reach</dt><dd>Inbound search, product pages, Scinode self-serve RFQ</dd></dl></div>
-    <div class="seg bar-blue"><span class="tag t-blue">Buyer</span><h3>Startups and innovators</h3><dl><dt>Who</dt><dd>Battery, semiconductor, materials startups</dd><dt>Need</dt><dd>Lab-to-pilot-to-plant in one partner</dd><dt>Reach</dt><dd>Investor networks, accelerators, IONS R&amp;D projects</dd></dl></div>
-    <div class="seg bar-gold"><span class="tag t-gold">Supply</span><h3>Partner plants and CDMOs</h3><dl><dt>Who</dt><dd>~500 plants; the top 50 by order volume first</dd><dt>Need</dt><dd>Steady orders, less paperwork, faster payment</dd><dt>Reach</dt><dd>Field and sourcing teams; free batch log; Priority tier</dd></dl></div>
-    <div class="seg bar-gold"><span class="tag t-gold">Supply</span><h3>Long-tail SME plants</h3><dl><dt>Who</dt><dd>Digitally invisible plants: Vapi, Ankleshwar, Hyderabad; abroad later</dd><dt>Need</dt><dd>Fill idle capacity in down-cycles</dd><dt>Reach</dt><dd>Industry associations, WhatsApp onboarding, profiles pre-filled from web data</dd></dl></div>
-    <div class="seg bar-em"><span class="tag t-em">Research</span><h3>Labs, CROs and scientists</h3><dl><dt>Who</dt><dd>IITs, CSIR labs, private CROs, independent PhDs</dd><dt>Need</dt><dd>Funded projects and a path to commercialise</dd><dt>Reach</dt><dd>IONS opportunity feed, university tie-ups, paid R&amp;D milestones</dd></dl></div>
-  </div>
-  <div class="foot"><span>Go-to-market</span><span class="pg"></span></div>
-</section>
-
-<!-- Monetisation flow -->
 <section id="monetise" class="slide" aria-label="Monetisation">
   <div class="eyebrow"><span class="dot"></span>Ways to monetise</div>
   <h2>Six revenue streams; order margin stays the engine</h2>
@@ -523,7 +553,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Business model</span><span class="pg"></span></div>
 </section>
 
-<!-- Challenges -->
 <section id="challenges" class="slide" aria-label="Challenges">
   <div class="eyebrow"><span class="dot" style="background:var(--alert)"></span>Challenges</div>
   <h2>Eight risks, and how to defuse each</h2>
@@ -540,7 +569,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Risks</span><span class="pg"></span></div>
 </section>
 
-<!-- Phases -->
 <section id="phases" class="slide" aria-label="Six-month plan">
   <div class="eyebrow"><span class="dot"></span>Six-month plan · phases</div>
   <h2>Each phase earns the next</h2>
@@ -567,7 +595,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Plan</span><span class="pg"></span></div>
 </section>
 
-<!-- Month by month -->
 <section id="monthly" class="slide" aria-label="Month by month launch plan">
   <div class="eyebrow"><span class="dot"></span>Tentative launch plan · month by month</div>
   <h2>What ships each month</h2>
@@ -585,7 +612,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Plan · tentative</span><span class="pg"></span></div>
 </section>
 
-<!-- Targets + trust -->
 <section id="success" class="slide" aria-label="Success and trust">
   <div class="eyebrow"><span class="dot"></span>Success and trust</div>
   <h2>Keep 500 × 10, but count what's verified, and make trust a mechanism</h2>
@@ -613,7 +639,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Plan</span><span class="pg"></span></div>
 </section>
 
-<!-- Architecture -->
 <section id="architecture" class="slide" aria-label="Architecture">
   <div class="eyebrow"><span class="dot"></span>Architecture sketch</div>
   <h2>SAP stays the record; Scinode reads it, reasons, and writes orders back</h2>
@@ -632,7 +657,6 @@ td.gap { color: #B0302C; }
   <div class="foot"><span>Plan</span><span class="pg"></span></div>
 </section>
 
-<!-- Decisions -->
 <section id="decisions" class="slide dark" aria-label="Decisions">
   <div class="eyebrow"><span class="dot"></span>Decisions to make</div>
   <h2 style="color:#fff">Six decisions that unlock the plan</h2>
