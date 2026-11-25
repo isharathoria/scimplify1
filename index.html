@@ -209,11 +209,36 @@ td.gap { color: #B0302C; }
   .mflow .arrow, .mflow .mhead, .mflow > div:empty { display: none; }
   .mflow .mbox.rev { margin-bottom: 14px; }
 }
+
+/* Platform slides */
+.plat { display: grid; grid-template-columns: 300px 1fr 1fr; gap: 16px; flex: 1; }
+.pcard { border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; color: #F2F5F5; }
+.pcard.ions { background: linear-gradient(165deg, #064E3B, var(--navy)); }
+.pcard.atoms { background: linear-gradient(165deg, #3B2F0B, var(--navy)); }
+.pcard h3 { color: #fff; font-size: 17px; }
+.pcard ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.pcard li { font-size: 13px; line-height: 1.4; padding-left: 14px; position: relative; color: rgba(242,245,245,.85); }
+.pcard li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.pcard.atoms li::before { background: var(--gold); }
+.pcard .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; }
+.pcard .kpis div { background: rgba(255,255,255,.07); border-radius: 8px; padding: 8px 10px; }
+.pcard .kpis b { display: block; font: 500 20px var(--display); color: #fff; }
+.pcard .kpis span { font-size: 11.5px; color: rgba(242,245,245,.65); }
+.plist { border: 1px solid var(--line); border-radius: 12px; background: #fff; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.plist .hd { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.plist .hd h3 { font-size: 16px; }
+.pitem { padding: 6px 0; border-top: 1px solid var(--line); }
+.pitem:first-of-type { border-top: 0; }
+.pitem b { display: block; font-size: 14.5px; font-weight: 600; }
+.pitem span { display: block; font-size: 12.8px; color: var(--muted); line-height: 1.38; margin-top: 2px; }
+.reach { font-size: 14px; color: var(--muted); }
+.reach strong { color: var(--ink); }
+@media (max-width: 960px) { .plat { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <nav class="topnav" aria-label="Sections"><div class="in"><strong>Scinode</strong>
-<a href="#review">Review</a><a href="#gaps">Gaps</a><a href="#landscape">Market</a><a href="#market-ai">Options</a><a href="#segments">Customers</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#monthly">6-month plan</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a></div></nav>
+<a href="#review">Review</a><a href="#ions">IONS</a><a href="#atoms">ATOMS</a><a href="#gaps">Gaps</a><a href="#landscape">Market</a><a href="#market-ai">Options</a><a href="#segments">Customers</a><a href="#monetise">Monetise</a><a href="#challenges">Challenges</a><a href="#monthly">6-month plan</a><a href="#architecture">Architecture</a><a href="#decisions">Decisions</a></div></nav>
 <div class="stage">
 <div class="deck" id="deck">
 
@@ -256,6 +281,78 @@ td.gap { color: #B0302C; }
 </section>
 
 <!-- What's working -->
+<section id="ions" class="slide" aria-label="IONS for researchers">
+  <div class="eyebrow"><span class="dot" style="background:var(--emerald)"></span>IONS · research platform</div>
+  <h2>IONS turns labs and scientists into an on-demand R&amp;D bench</h2>
+  <div class="plat">
+    <div class="pcard ions">
+      <span class="tag" style="background:rgba(16,185,129,.2);color:#6EE7B7">What IONS does</span>
+      <ul>
+        <li>Labs list capabilities across 20+ industries and 350+ techniques</li>
+        <li>Matched R&amp;D opportunities arrive in a feed (7-day expiry)</li>
+        <li>Labs send proposals and run projects in a shared workspace</li>
+        <li>Built-in tools: Deep Research, Market Pulse, Demand Catalyst</li>
+        <li>Gap today: no verified track record per lab; IP terms not public</li>
+      </ul>
+      <div class="kpis num"><div><b>161</b><span>live opportunities</span></div><div><b>50+</b><span>new per week</span></div><div><b>200+</b><span>researchers in app</span></div><div><b>90+</b><span>projects delivered</span></div></div>
+    </div>
+    <div class="plist">
+      <div class="hd"><span class="tag t-em">Users</span><h3>Who supplies the R&amp;D</h3></div>
+      <div class="pitem"><b>Academic and government labs</b><span>IITs, IISc, ICT Mumbai, CSIR-NCL Pune, CSIR-IICT Hyderabad</span></div>
+      <div class="pitem"><b>Private CROs and CRDMOs</b><span>Mid-size Indian CROs with spare chemist capacity; Sai Life Sciences-type</span></div>
+      <div class="pitem"><b>Independent PhDs and retired industry scientists</b><span>Niche know-how: fluorination, photoresists, catalysis, peptides</span></div>
+      <div class="pitem"><b>Analytical and testing labs</b><span>Characterisation, impurity profiling, stability studies</span></div>
+      <div class="pitem"><b>Overseas university labs (later)</b><span>Tech-transfer offices in Germany, Japan, the US</span></div>
+    </div>
+    <div class="plist">
+      <div class="hd"><span class="tag t-blue">Buyers</span><h3>Who brings R&amp;D projects</h3></div>
+      <div class="pitem"><b>Specialty and agrochemical companies</b><span>Route development and cost-down: Coromandel (on Scinode's trusted-by list), PI Industries, UPL</span></div>
+      <div class="pitem"><b>Pharma and generic API makers</b><span>Process R&amp;D, impurity work, new generic molecules</span></div>
+      <div class="pitem"><b>Battery, semiconductor and materials startups</b><span>Lab-to-pilot work, e.g. Li-Si powder and MoCl₄ requests seen on IONS</span></div>
+      <div class="pitem"><b>Global corporates outsourcing R&amp;D</b><span>BASF, Sumitomo (trusted-by list); Henkel (investor)</span></div>
+      <div class="pitem"><b>FMCG and personal-care formulators</b><span>ITC, Dabur (trusted-by list): actives, UV filters, green surfactants</span></div>
+    </div>
+  </div>
+  <p class="reach"><strong>How to reach:</strong> university and CSIR tie-ups, tech-transfer offices, CRO networks for users; Scimplify key-account teams and the IONS opportunity feed for buyers.</p>
+  <div class="foot"><span>Platforms</span><span class="pg"></span></div>
+</section>
+
+<section id="atoms" class="slide" aria-label="ATOMS for manufacturers">
+  <div class="eyebrow"><span class="dot" style="background:var(--gold)"></span>ATOMS · manufacturer platform</div>
+  <h2>ATOMS makes idle plant capacity discoverable and bookable</h2>
+  <div class="plat">
+    <div class="pcard atoms">
+      <span class="tag" style="background:rgba(212,167,44,.22);color:#F3D27A">What ATOMS does</span>
+      <ul>
+        <li>Plant profile: ~170 reaction types, reactors (KL, MoC), utilities</li>
+        <li>Matched RFQs arrive; plants send proposals</li>
+        <li>Market Pulse price signals; Deep Research</li>
+        <li>Demand Catalyst: Scinode sales promotes star products</li>
+        <li>Gap today: capability is self-declared; nothing for daily plant work</li>
+      </ul>
+      <div class="kpis num"><div><b>226</b><span>open RFQs</span></div><div><b>~1,100</b><span>projects logged</span></div><div><b>Free</b><span>Access Partner</span></div><div><b>₹5L/yr</b><span>Priority Partner</span></div></div>
+    </div>
+    <div class="plist">
+      <div class="hd"><span class="tag t-gold">Users</span><h3>Who supplies capacity</h3></div>
+      <div class="pitem"><b>Specialty-chemical SME plants in Indian clusters</b><span>Vapi, Ankleshwar, Dahej (Gujarat); Tarapur (Maharashtra); Hyderabad, Vizag</span></div>
+      <div class="pitem"><b>Mid-size CDMOs and CMOs</b><span>Multipurpose plants with idle reactors in demand down-cycles</span></div>
+      <div class="pitem"><b>Pharma intermediate and API plants</b><span>GMP and non-GMP units making intermediates</span></div>
+      <div class="pitem"><b>Metals and critical-materials processors</b><span>Tungsten, rare earths, battery recycling (APT and black-mass RFQs seen)</span></div>
+      <div class="pitem"><b>Overseas plants (later)</b><span>Germany's ~1,200 chemical manufacturers, SE Asia, Middle East</span></div>
+    </div>
+    <div class="plist">
+      <div class="hd"><span class="tag t-blue">Buyers</span><h3>Who brings demand</h3></div>
+      <div class="pitem"><b>Global chemical companies and distributors</b><span>BASF, Sumitomo, Azelis (trusted-by list)</span></div>
+      <div class="pitem"><b>Agrochemical majors</b><span>Coromandel (trusted-by list) and active-ingredient makers needing intermediates</span></div>
+      <div class="pitem"><b>Pharma and generic API companies</b><span>Intermediates and APIs, like the ~60 pharma RFQs live on ATOMS</span></div>
+      <div class="pitem"><b>Coatings, polymers and construction</b><span>Henkel, Teknor Apex (investors and customers); Saudi coatings RFQs seen</span></div>
+      <div class="pitem"><b>Electronics, energy and defense (US, Japan)</b><span>China-free critical materials: Scimplify's fastest-growing segment</span></div>
+    </div>
+  </div>
+  <p class="reach"><strong>How to reach:</strong> cluster associations, field teams, WhatsApp and the free batch log for plants; key accounts, trading houses and inbound RFQs for buyers.</p>
+  <div class="foot"><span>Platforms</span><span class="pg"></span></div>
+</section>
+
 <section id="working" class="slide" aria-label="What is working">
   <div class="eyebrow"><span class="dot"></span>What's working</div>
   <h2>The front end is further along than it looks</h2>
